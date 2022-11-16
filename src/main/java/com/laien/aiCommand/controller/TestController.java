@@ -1,5 +1,6 @@
 package com.laien.aiCommand.controller;
 
+import com.laien.aiCommand.AiCommandJavaApplication;
 import com.laien.aiCommand.controller.base.ResponseController;
 import com.laien.aiCommand.controller.base.ResponseResult;
 import io.swagger.annotations.Api;
@@ -33,6 +34,6 @@ public class TestController extends ResponseController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return succ("Hello World!," + addr.getHostAddress() + "," + hostname);
+        return succ("Hello World!," + addr.getHostAddress() + "," + hostname + ",taskid=" + AiCommandJavaApplication.taskId);
     }
 }

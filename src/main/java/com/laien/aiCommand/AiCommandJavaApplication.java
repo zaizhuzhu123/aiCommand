@@ -25,8 +25,12 @@ import org.springframework.web.client.RestTemplate;
 @EnableScheduling
 public class AiCommandJavaApplication {
 
+    public static String taskId;
+
     public static void main(String[] args) {
+        taskId = args[0];
         SpringApplication.run(AiCommandJavaApplication.class, args);
+        System.out.println(taskId);
     }
 
     @Bean
