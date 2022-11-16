@@ -104,7 +104,7 @@ public class CommandExecutor {
         ForkerBuilder builder = new ForkerBuilder().io(IO.NON_BLOCKING).redirectErrorStream(true);
         List<String> strings = Splitter.on(" ").omitEmptyStrings().splitToList(command);
         builder.command(strings.toArray(new String[strings.size()]));
-        log.debug("runCommond : " + command);
+        log.info("runCommond : " + command);
         StringBuffer processOutMsg = new StringBuffer();
         Process process = builder.start(new DefaultNonBlockingProcessListener() {
             @Override
@@ -122,7 +122,7 @@ public class CommandExecutor {
         } else {
             process.waitFor(timeout, unit);
         }
-        log.debug(processOutMsg.toString());
+        log.info(processOutMsg.toString());
         return processOutMsg.toString();
     }
 

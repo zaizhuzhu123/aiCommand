@@ -22,11 +22,8 @@ public class CloneDreamBoothCodeStep implements InstallDreamBoothStep {
     public void run() throws IOException, InterruptedException {
         log.info("-------------------------------------------");
         log.info(this.getClass().getSimpleName());
-        String cmd = "cd /workspace\n";
+        String cmd = "git clone https://github.com/JoePenna/Dreambooth-Stable-Diffusion /workspace/Dreambooth-Stable-Diffusion";
         String result = commandExecutor.execResult(30, TimeUnit.SECONDS, cmd);
-        log.info(result);
-        cmd = "git clone https://github.com/JoePenna/Dreambooth-Stable-Diffusion\n";
-        result = commandExecutor.execResult(30, TimeUnit.SECONDS, cmd);
         log.info(result);
     }
 }
