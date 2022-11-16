@@ -22,7 +22,7 @@ public class HuggingfaceLoginStep implements InstallDreamBoothStep {
     public void run() throws IOException, InterruptedException {
         log.info("-------------------------------------------");
         log.info(this.getClass().getSimpleName());
-        String cmd = "sh /workspace/aiCommand/target/soft/shell/huggingFaceLogging.sh";
+        String cmd = "sh /workspace/aiCommand/target/soft/shell/huggingFaceLogin.sh";
         commandExecutor.execResult(10, TimeUnit.SECONDS, cmd);
     }
 }
