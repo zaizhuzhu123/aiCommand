@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 @Component
 @RestController
 @Api(tags = "管理端：接口测试")
@@ -16,6 +19,15 @@ public class TestController extends ResponseController {
     @GetMapping("/test")
     @ApiOperation(value = "测试")
     public ResponseResult<String> test() {
-        return succ("Hello World!");
+        InetAddress addr = null;
+        try {
+            addr = InetAddress.getLocalHost();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+//        System.out.println("Local HostAddress: " + addr.getHostAddress());
+        String hostname = addr.getHostName();
+//        System.out.println("Local host name: " + hostname);
+        return succ("Hello World!," + addr.getHostAddress() + "," + hostname);
     }
 }
