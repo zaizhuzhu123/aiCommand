@@ -24,28 +24,7 @@ public class InstallRequirementStep implements InstallDreamBoothStep {
     public void run() throws IOException, InterruptedException {
         log.info("-------------------------------------------");
         log.info(this.getClass().getSimpleName());
-        List<String> commandList = Lists.newArrayList();
-        commandList.add("pip install omegaconf");
-        commandList.add("pip install einops");
-        commandList.add("pip install pytorch-lightning==1.6.5");
-        commandList.add("pip install test-tube");
-        commandList.add("pip install transformers");
-        commandList.add("pip install kornia");
-        commandList.add("pip install -e git+https://github.com/CompVis/taming-transformers.git@master#egg=taming-transformers");
-        commandList.add("pip install -e git+https://github.com/openai/CLIP.git@main#egg=clip");
-        commandList.add("pip install setuptools==59.5.0");
-        commandList.add("pip install pillow==9.0.1");
-        commandList.add("pip install torchmetrics==0.6.0");
-        commandList.add("pip install -e .");
-        commandList.add("pip install protobuf==3.20.1");
-        commandList.add("pip install gdown");
-        commandList.add("pip install -qq diffusers[“training”]==0.3.0 transformers ftfy");
-        commandList.add("pip install -qq \"ipywidgets>=7,<8\"");
-        commandList.add("pip install huggingface_hub");
-        commandList.add("pip install ipywidgets==7.7.1");
-        commandList.add("pip install captionizer==1.0.1");
-        for (String command : commandList) {
-            commandExecutor.execResult(30, TimeUnit.SECONDS, command);
-        }
+        String cmd = "sh /workspace/aiCommand/target/soft/shell/intallRequirement.sh";
+        commandExecutor.execResult(300, TimeUnit.SECONDS, cmd);
     }
 }
