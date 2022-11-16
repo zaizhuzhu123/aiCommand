@@ -22,7 +22,7 @@ public class KillWebuiStep implements InstallDreamBoothStep {
     public void run() throws IOException, InterruptedException {
         log.info("-------------------------------------------");
         log.info(this.getClass().getSimpleName());
-        String cmd = "ps -aux\n";
+        String cmd = "ps -aux";
         String result = commandExecutor.execResult(10, TimeUnit.SECONDS, cmd);
         log.info(result);
         String[] split = result.split("\n");
