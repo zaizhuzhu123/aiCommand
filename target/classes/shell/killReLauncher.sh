@@ -1,3 +1,4 @@
+#!/bin/bash
 pid=`ps -aux | grep launcher | awk '{print $2}' `
 if [ -e $pid ]
 then
