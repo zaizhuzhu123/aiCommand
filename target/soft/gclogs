@@ -1,0 +1,10 @@
+Java HotSpot(TM) 64-Bit Server VM (25.251-b08) for bsd-amd64 JRE (1.8.0_251-b08), built on Mar 12 2020 02:36:37 by "java_re" with gcc 4.2.1 (Based on Apple Inc. build 5658) (LLVM build 2336.11.00)
+Memory: 4k page, physical 16777216k(129012k free)
+
+/proc/meminfo:
+
+CommandLine flags: -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./java_heapdump.hprof -XX:InitialHeapSize=1073741824 -XX:MaxHeapSize=1073741824 -XX:+PrintGC -XX:+PrintGCDateStamps -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+UseCompressedClassPointers -XX:+UseCompressedOops -XX:+UseParallelGC 
+2022-11-16T13:51:56.160-0800: 1.608: [GC (Metadata GC Threshold) [PSYoungGen: 120597K->15128K(305664K)] 120597K->15136K(1005056K), 0.0319878 secs] [Times: user=0.11 sys=0.04, real=0.03 secs] 
+2022-11-16T13:51:56.192-0800: 1.641: [Full GC (Metadata GC Threshold) [PSYoungGen: 15128K->0K(305664K)] [ParOldGen: 8K->14297K(699392K)] 15136K->14297K(1005056K), [Metaspace: 20432K->20430K(1067008K)], 0.0207858 secs] [Times: user=0.07 sys=0.01, real=0.02 secs] 
+2022-11-16T13:51:59.570-0800: 5.019: [GC (Metadata GC Threshold) [PSYoungGen: 195746K->20617K(305664K)] 210044K->34922K(1005056K), 0.0194581 secs] [Times: user=0.08 sys=0.03, real=0.02 secs] 
+2022-11-16T13:51:59.590-0800: 5.038: [Full GC (Metadata GC Threshold) [PSYoungGen: 20617K->0K(305664K)] [ParOldGen: 14305K->24005K(699392K)] 34922K->24005K(1005056K), [Metaspace: 33504K->33504K(1081344K)], 0.0443899 secs] [Times: user=0.11 sys=0.01, real=0.04 secs] 
