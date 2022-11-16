@@ -22,7 +22,7 @@ public class DownloadCkptStep implements InstallDreamBoothStep {
     public void run() throws IOException, InterruptedException {
         log.info("-------------------------------------------");
         log.info(this.getClass().getSimpleName());
-        String cmd = "wget https://n1ckey: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@huggingface.co/CompVis/stable-diffusion-v-1-4-original/resolve/main/sd-v1-4.ckpt /workspace/Dreambooth-Stable-Diffusion\n";
+        String cmd = "wget https://n1ckey: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@huggingface.co/CompVis/stable-diffusion-v-1-4-original/resolve/main/sd-v1-4.ckpt -P /workspace/Dreambooth-Stable-Diffusion\n";
         String result = commandExecutor.execResult(300, TimeUnit.SECONDS, cmd);
         log.info(result);
         cmd = "mv /workspace/Dreambooth-Stable-Diffusion/sd-v1-4.ckpt /workspace/Dreambooth-Stable-Diffusion/model.ckpt\n";

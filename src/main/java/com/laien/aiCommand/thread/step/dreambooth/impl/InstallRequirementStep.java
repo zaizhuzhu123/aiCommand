@@ -36,7 +36,7 @@ public class InstallRequirementStep implements InstallDreamBoothStep {
         commandList.add("pip install setuptools==59.5.0\n");
         commandList.add("pip install pillow==9.0.1\n");
         commandList.add("pip install torchmetrics==0.6.0\n");
-        commandList.add("pip install -e\n");
+        commandList.add("pip install -e .\n");
         commandList.add("pip install protobuf==3.20.1\n");
         commandList.add("pip install gdown\n");
         commandList.add("pip install -qq diffusers[“training”]==0.3.0 transformers ftfy\n");
