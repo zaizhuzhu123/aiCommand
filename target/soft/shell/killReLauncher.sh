@@ -1,7 +1,7 @@
 #!/bin/bash
 pid=`ps -aux | grep launcher | awk '{print $2}' `
 echo $pid
-if  test $pid 
+if  [ $pid ];
 then
     kill -9 $pid
 else
