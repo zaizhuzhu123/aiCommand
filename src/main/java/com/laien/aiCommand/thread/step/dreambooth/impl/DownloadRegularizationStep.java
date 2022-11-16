@@ -22,15 +22,7 @@ public class DownloadRegularizationStep implements InstallDreamBoothStep {
     public void run() throws IOException, InterruptedException {
         log.info("-------------------------------------------");
         log.info(this.getClass().getSimpleName());
-        String cmd, result;
-//        cmd = "git clone https://github.com/djbielejeski/Stable-Diffusion-Regularization-Images-person_ddim.git /workspace/Dreambooth-Stable-Diffusion/Stable-Diffusion-Regularization-Images-person_ddim";
-//        result = commandExecutor.execResult(180, TimeUnit.SECONDS, cmd);
-//        log.info(result);
-//        cmd = "mkdir -p /workspace/Dreambooth-Stable-Diffusion/regularization_images/person_ddim";
-//        result = commandExecutor.execResult(10, TimeUnit.SECONDS, cmd);
-//        log.info(result);
-        cmd = "mv -v /workspace/Dreambooth-Stable-Diffusion/Stable-Diffusion-Regularization-Images-person_ddim/person_ddim/*.* /workspace/Dreambooth-Stable-Diffusion/regularization_images/person_ddim";
-        result = commandExecutor.execResult(30, TimeUnit.SECONDS, cmd);
-        log.info(result);
+        String cmd = "sh /workspace/aiCommand/target/soft/shell/downloadRegularization.sh";
+        commandExecutor.execResult(300, TimeUnit.SECONDS, cmd);
     }
 }

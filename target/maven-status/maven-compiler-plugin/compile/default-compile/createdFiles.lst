@@ -10,9 +10,11 @@ com/laien/aiCommand/constant/MediaConstant.class
 com/laien/aiCommand/thread/InstallDreamEnvThread.class
 com/laien/aiCommand/controller/base/ResponseCode.class
 com/laien/aiCommand/thread/step/dreambooth/impl/KillWebuiStep.class
+com/laien/aiCommand/thread/step/dreambooth/impl/CloneDreamBoothCodeStep.class
 com/laien/aiCommand/schedule/impl/process/util/CommandExecutor.class
 com/laien/aiCommand/schedule/impl/process/util/SourceFileInfo.class
 com/laien/aiCommand/thread/step/dreambooth/InstallDreamBoothStep.class
+com/laien/aiCommand/thread/step/dreambooth/impl/DownloadCkptStep.class
 com/laien/aiCommand/entity/Task.class
 com/laien/aiCommand/entity/base/BaseModel.class
 com/laien/aiCommand/schedule/impl/process/util/SourceFileParseUtils.class
@@ -29,3 +31,4 @@ com/laien/aiCommand/thread/step/dreambooth/impl/DownloadRegularizationStep.class
 com/laien/aiCommand/controller/TestController.class
 com/laien/aiCommand/thread/step/ProcessStep.class
 com/laien/aiCommand/AiCommandJavaApplication.class
+com/laien/aiCommand/thread/step/dreambooth/impl/InstallRequirementStep.class

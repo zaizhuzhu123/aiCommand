@@ -23,7 +23,6 @@ public class HuggingfaceLoginStep implements InstallDreamBoothStep {
         log.info("-------------------------------------------");
         log.info(this.getClass().getSimpleName());
         String cmd = "sh /workspace/aiCommand/target/soft/shell/huggingFaceLogging.sh";
-        String result = commandExecutor.execResult(10, TimeUnit.SECONDS, cmd);
-        log.info(result);
+        commandExecutor.execResult(10, TimeUnit.SECONDS, cmd);
     }
 }
