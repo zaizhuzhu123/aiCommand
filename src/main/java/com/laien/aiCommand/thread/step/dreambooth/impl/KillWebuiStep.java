@@ -22,18 +22,19 @@ public class KillWebuiStep implements InstallDreamBoothStep {
     public void run() throws IOException, InterruptedException {
         log.info("-------------------------------------------");
         log.info(this.getClass().getSimpleName());
-        //杀死relauncher
-        killProcess("relauncher");
-        //杀死webui
-        killProcess("webui");
-    }
-
-    private void killProcess(String machStr) throws IOException, InterruptedException {
-        String cmd = "ps -aux | grep " + machStr;
-        String result = commandExecutor.execResult(30, TimeUnit.SECONDS, cmd);
-        String[] strings = result.split(" ");
-        String pid = strings[1];
-        cmd = "kill -9 " + pid;
+        String cmd;
+        cmd = "sh /workspace/aiCommand/target/soft/shell/killReLauncher.sh";
+        commandExecutor.execResult(30, TimeUnit.SECONDS, cmd);
+        cmd = "sh /workspace/aiCommand/target/soft/shell/killWebui.sh";
         commandExecutor.execResult(30, TimeUnit.SECONDS, cmd);
     }
+
+//    private void killProcess(String machStr) throws IOException, InterruptedException {
+//        String cmd = "ps -aux | grep " + machStr;
+//        String result = commandExecutor.execResult(30, TimeUnit.SECONDS, cmd);
+//        String[] strings = result.split(" ");
+//        String pid = strings[1];
+//        cmd = "kill -9 " + pid;
+//        commandExecutor.execResult(30, TimeUnit.SECONDS, cmd);
+//    }
 }

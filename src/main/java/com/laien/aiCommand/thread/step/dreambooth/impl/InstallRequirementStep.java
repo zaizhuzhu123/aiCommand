@@ -1,6 +1,5 @@
 package com.laien.aiCommand.thread.step.dreambooth.impl;
 
-import com.google.common.collect.Lists;
 import com.laien.aiCommand.schedule.impl.process.util.CommandExecutor;
 import com.laien.aiCommand.thread.step.dreambooth.InstallDreamBoothStep;
 import lombok.extern.slf4j.Slf4j;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -24,7 +22,7 @@ public class InstallRequirementStep implements InstallDreamBoothStep {
     public void run() throws IOException, InterruptedException {
         log.info("-------------------------------------------");
         log.info(this.getClass().getSimpleName());
-        String cmd = "sh /workspace/aiCommand/target/soft/shell/intallRequirement.sh";
+        String cmd = "sh /workspace/aiCommand/target/soft/shell/installRequirement.sh";
         commandExecutor.execResult(300, TimeUnit.SECONDS, cmd);
     }
 }
