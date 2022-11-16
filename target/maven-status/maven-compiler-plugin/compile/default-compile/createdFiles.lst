@@ -1,3 +1,4 @@
+com/laien/aiCommand/controller/MacUtils.class
 com/laien/aiCommand/schedule/impl/process/util/CommandExecutor$3.class
 com/laien/aiCommand/util/HttpUtils.class
 com/laien/aiCommand/schedule/impl/process/util/CommandExecutor$CommondListener.class

@@ -28,6 +28,11 @@ public class TestController extends ResponseController {
 //        System.out.println("Local HostAddress: " + addr.getHostAddress());
         String hostname = addr.getHostName();
 //        System.out.println("Local host name: " + hostname);
+        try {
+            System.out.println(MacUtils.getLocalHostMacAddress());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return succ("Hello World!," + addr.getHostAddress() + "," + hostname);
     }
 }

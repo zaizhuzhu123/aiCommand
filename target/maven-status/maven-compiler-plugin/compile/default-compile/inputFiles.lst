@@ -2,6 +2,7 @@
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/schedule/TaskDispatcher.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/service/impl/Mp3GainImpl.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/service/IMp3Gain.java
+/Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/controller/MacUtils.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/schedule/impl/process/TaskCompressionActuatorByVideo.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/config/MybatisPlusConfig.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/service/impl/TaskServiceImpl.java
