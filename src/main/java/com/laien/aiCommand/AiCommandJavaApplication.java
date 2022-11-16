@@ -27,7 +27,9 @@ import org.springframework.web.client.RestTemplate;
 public class AiCommandJavaApplication {
 
     public static void main(String[] args) {
-        AppliacationInfo.currentTaskId = args[0];
+        if (args != null & args.length > 0) {
+            AppliacationInfo.currentTaskId = args[0];
+        }
         SpringApplication.run(AiCommandJavaApplication.class, args);
     }
 
