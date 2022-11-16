@@ -30,7 +30,7 @@ public class DownloadFirebaseImgStep implements DreamBoothTrainStep {
     public void run(AiTaskAddRequest aiTaskAddRequest) throws IOException, InterruptedException {
         List<String> firebaseImgs = aiTaskAddRequest.getFirebaseImgs();
         if (CollectionUtils.isNotEmpty(firebaseImgs)) {
-            File taskDir = new File(AppliacationInfo.userImgSavePath + AppliacationInfo.currentTaskId);
+            File taskDir = new File(AppliacationInfo.userImgSavePath);
             if (!taskDir.exists()) {
                 taskDir.mkdirs();
             }

@@ -50,8 +50,8 @@ public class TestController extends ResponseController {
     @Resource
     private List<DreamBoothTrainStep> dreamBoothTrainSteps;
 
-    @PostMapping("/add")
-    @ApiOperation(value = "测试")
+    @PostMapping("/trainingAndgenerate")
+    @ApiOperation(value = "训练加生成")
     public ResponseResult<String> add(AiTaskAddRequest aiTaskAddRequest) throws IOException, InterruptedException {
         if (CollectionUtils.isNotEmpty(dreamBoothTrainSteps)) {
             for (DreamBoothTrainStep dreamBoothTrainStep : dreamBoothTrainSteps) {
@@ -59,5 +59,11 @@ public class TestController extends ResponseController {
             }
         }
         return succ("Hello World!");
+    }
+
+    @PostMapping("/progress")
+    @ApiOperation(value = "获取进度")
+    public ResponseResult<Long> progress() throws IOException, InterruptedException {
+        return succ(0L);
     }
 }
