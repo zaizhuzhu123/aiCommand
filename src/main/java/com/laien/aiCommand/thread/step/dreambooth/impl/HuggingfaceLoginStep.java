@@ -22,7 +22,7 @@ public class HuggingfaceLoginStep implements InstallDreamBoothStep {
     public void run() throws IOException, InterruptedException {
         log.info("-------------------------------------------");
         log.info(this.getClass().getSimpleName());
-        String cmd = "python -c \"from huggingface_hub.hf_api import HfFolder; HfFolder.save_token('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');print('success')\"";
+        String cmd = "sh /workspace/aiCommand/target/soft/shell/huggingFaceLogging.sh";
         String result = commandExecutor.execResult(10, TimeUnit.SECONDS, cmd);
         log.info(result);
     }
