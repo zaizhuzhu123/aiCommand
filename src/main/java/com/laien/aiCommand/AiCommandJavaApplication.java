@@ -2,6 +2,7 @@ package com.laien.aiCommand;
 
 //import org.mybatis.spring.annotation.MapperScan;
 
+import com.laien.aiCommand.config.AppliacationInfo;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,12 +26,9 @@ import org.springframework.web.client.RestTemplate;
 @EnableScheduling
 public class AiCommandJavaApplication {
 
-    public static String taskId;
-
     public static void main(String[] args) {
-        taskId = args[0];
+        AppliacationInfo.currentTaskId = args[0];
         SpringApplication.run(AiCommandJavaApplication.class, args);
-        System.out.println(taskId);
     }
 
     @Bean
