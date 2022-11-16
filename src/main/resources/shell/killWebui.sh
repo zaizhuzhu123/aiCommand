@@ -1,4 +1,4 @@
 pid=`ps -aux | grep webui | awk '{print $2}' `
-if [ $pid ]; then
+if test $pid
 kill -9 $pid
-fi
+end
