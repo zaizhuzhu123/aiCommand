@@ -7,4 +7,4 @@
 #else
 #    echo "无需关闭"
 #fi
-kill -9 $( ps -e|grep launcher |awk '{print $1}')
+kill -9 $( ps -aux|grep launcher |awk '{print $2}')
