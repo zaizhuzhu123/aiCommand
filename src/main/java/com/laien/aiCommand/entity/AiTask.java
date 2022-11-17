@@ -96,9 +96,21 @@ public class AiTask {
 
     public Date getPlanCompletionTime() {
         long totalSeconds = 0L;
+        Date oldTime = planCompletionTime;
         for (AiTaskStep step : steps) {
             totalSeconds += step.getRemainingFinishTime();
         }
-        return new Date(System.currentTimeMillis() + (totalSeconds * 1000));
+        long newTime = System.currentTimeMillis() + (totalSeconds * 1000);
+        if (oldTime != null) {
+            long oldTimeStamp = oldTime.getTime();
+            if (newTime < oldTimeStamp) {
+                planCompletionTime = new Date(newTime);
+            } else {
+                planCompletionTime = new Date(oldTimeStamp);
+            }
+        } else {
+            planCompletionTime = new Date(newTime);
+        }
+        return planCompletionTime;
     }
 }
