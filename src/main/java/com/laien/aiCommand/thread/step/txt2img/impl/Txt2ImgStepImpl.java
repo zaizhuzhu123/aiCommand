@@ -22,7 +22,7 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
     @Override
     public void run(AiTaskAddRequest aiTaskAddRequest) throws IOException, InterruptedException {
         StringBuffer cmd = new StringBuffer();
-        cmd.append("python /workspace/Dreambooth-Stable-Diffusion/stable_txt2img.py ");
+        cmd.append("python /workspace/Dreambooth-Stable-Diffusion/scripts/stable_txt2img.py ");
         cmd.append("--seed 10  ");
         cmd.append("--ddim_eta 0.0 ");
         cmd.append("--n_samples 1 ");
