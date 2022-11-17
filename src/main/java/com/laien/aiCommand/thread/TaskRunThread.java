@@ -93,6 +93,8 @@ public class TaskRunThread extends Thread {
                 } else {
                     return true;
                 }
+            } else {
+                return false;
             }
         }
         return false;
