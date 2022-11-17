@@ -12,6 +12,7 @@ import com.laien.aiCommand.thread.step.txt2img.Txt2ImgStep;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.List;
@@ -21,9 +22,6 @@ import static com.laien.aiCommand.constant.TaskConstant.*;
 
 @Component
 public class TaskRunThread extends Thread {
-
-    @Resource
-    private List<InstallDreamBoothStep> installDreamBoothStep;
 
     @Resource
     private List<DreamBoothTrainStep> dreamBoothTrainStep;
@@ -36,17 +34,19 @@ public class TaskRunThread extends Thread {
 
     private Map<String, List<ProcessStep>> processes = Maps.newHashMap();
 
-    public TaskRunThread() {
+    @PostConstruct
+    public void startThread() {
+        this.start();
+    }
+
+    @Override
+    public void run() {
         List<ProcessStep> trains = Lists.newArrayList();
         trains.addAll(dreamBoothTrainStep);
         processes.put(TASK_STEP_TYPE_TRAING, trains);
         List<ProcessStep> generate = Lists.newArrayList();
         generate.addAll(txt2ImgStep);
         processes.put(TASK_STEP_TYPE_GENERATE, generate);
-    }
-
-    @Override
-    public void run() {
         while (true) {
             try {
                 AiTask nextTask = aiTaskService.getNextTask();
