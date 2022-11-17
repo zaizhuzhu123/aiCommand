@@ -37,11 +37,12 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
         cmd.append("python " + dreamboothPath + "/main.py ");
         cmd.append("--base " + dreamboothPath + "/configs/stable-diffusion/v1-finetune_unfrozen.yaml ");
         cmd.append("--logdir " + logDir + " ");
-        cmd.append("--project " + projectName + " ");
+        cmd.append("--datadir_in_name false");
+//        cmd.append("--project " + projectName + " ");
         cmd.append("-t ");
         cmd.append("--actual_resume " + dreamboothPath + "/model.ckpt ");
         cmd.append("--reg_data_root " + dreamboothPath + "/regularization_images/person_ddim ");
-        cmd.append("-n \"marcos\" ");
+        cmd.append("-n " + projectName + " ");
         cmd.append("--gpus 0, ");
         cmd.append("--data_root /workspace/Marcos_Images ");
         cmd.append("--max_training_steps " + training_step + " ");
