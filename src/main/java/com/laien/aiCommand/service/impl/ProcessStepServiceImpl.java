@@ -16,22 +16,28 @@ public class ProcessStepServiceImpl implements IProcessStepService {
     @Resource
     private List<ProcessStep> allProcessSteps;
 
-    private Map<String, List<ProcessStep>> stepNameProcess = Maps.newHashMap();
+    private Map<String, List<ProcessStep>> stepNameProcess = null;
 
     public ProcessStepServiceImpl() {
-        for (ProcessStep processStep : allProcessSteps) {
-            List<ProcessStep> processes = stepNameProcess.get(processStep.type());
-            if (processes == null) {
-                processes = Lists.newArrayList();
-                stepNameProcess.put(processStep.type(), processes);
-            }
-            processes.add(processStep);
-        }
+
     }
 
 
     @Override
-    public List<ProcessStep> getProcessSteps(String stepName) {
+    public synchronized List<ProcessStep> getProcessSteps(String stepName) {
+        if (stepNameProcess == null) {
+            stepNameProcess = Maps.newHashMap();
+            for (ProcessStep processStep : allProcessSteps) {
+                List<ProcessStep> processes = stepNameProcess.get(processStep.type());
+                if (processes == null) {
+                    processes = Lists.newArrayList();
+                    stepNameProcess.put(processStep.type(), processes);
+                }
+                processes.add(processStep);
+            }
+        }
+
+
         return stepNameProcess.get(stepName);
     }
 
