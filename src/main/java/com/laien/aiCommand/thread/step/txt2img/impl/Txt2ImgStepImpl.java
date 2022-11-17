@@ -33,7 +33,13 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
         if (!ldmDir.exists()) {
             commandExecutor.execResult(3600, TimeUnit.SECONDS, "cp -r " + dreamboothPath + "/ldm " + dreamboothPath + "/scripts/");
         }
-        String ckptPath = AppliacationInfo.userTraingCkptPath.replace("{TASKID}", aiTask.getTaskId());
+        String ckptDirPath = AppliacationInfo.userTraingCkptPath.replace("{TASKID}", aiTask.getTaskId());
+        File ckptPathDir = new File(ckptDirPath);
+        File[] files = ckptPathDir.listFiles();
+        String ckptPath = "";
+        if (files.length > 0) {
+            ckptPath = files[files.length - 1].getAbsolutePath() + "/checkpoints/last.ckpt";
+        }
 
         StringBuffer cmd = new StringBuffer();
         cmd.append("python " + dreamboothPath + "/scripts/stable_txt2img.py ");
@@ -44,7 +50,7 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
         cmd.append("--n_iter 8 ");
         cmd.append("--scale 10.0 ");
         cmd.append("--ddim_steps 50 ");
-        cmd.append("--ckpt " + ckptPath + "/checkpoints/last.ckpt ");
+        cmd.append("--ckpt " + ckptPath + " ");
         cmd.append("--prompt marcos,anime ");
         commandExecutor.execResult(3600, TimeUnit.SECONDS, cmd.toString(), new CommandExecutor.CommondListener() {
             @Override

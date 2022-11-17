@@ -29,20 +29,20 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
 
     @Override
     public void run(AiTask aiTask, AiTaskStep currentStep) throws IOException, InterruptedException {
-        int training_step = 100;
+        int training_step = 10;
         StringBuffer cmd = new StringBuffer();
         String ckptPath = AppliacationInfo.userTraingCkptPath.replace("{TASKID}", aiTask.getTaskId());
-        String projectName = StringUtils.substringAfterLast(ckptPath, "/");
-        String logDir = StringUtils.substringBeforeLast(ckptPath, "/");
+//        String projectName = StringUtils.substringAfterLast(ckptPath, "/");
+//        String logDir = StringUtils.substringBeforeLast(ckptPath, "/");
         cmd.append("python " + dreamboothPath + "/main.py ");
         cmd.append("--base " + dreamboothPath + "/configs/stable-diffusion/v1-finetune_unfrozen.yaml ");
-        cmd.append("--logdir " + logDir + " ");
+        cmd.append("--logdir " + ckptPath + " ");
         cmd.append("--datadir_in_name false ");
 //        cmd.append("--project " + projectName + " ");
         cmd.append("-t ");
         cmd.append("--actual_resume " + dreamboothPath + "/model.ckpt ");
         cmd.append("--reg_data_root " + dreamboothPath + "/regularization_images/person_ddim ");
-        cmd.append("-n " + projectName + " ");
+//        cmd.append("-n " + projectName + " ");
         cmd.append("--gpus 0, ");
         cmd.append("--data_root /workspace/Marcos_Images ");
         cmd.append("--max_training_steps " + training_step + " ");
