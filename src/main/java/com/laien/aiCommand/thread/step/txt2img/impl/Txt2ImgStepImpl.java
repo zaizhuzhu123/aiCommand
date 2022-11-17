@@ -8,6 +8,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -21,6 +22,11 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
 
     @Override
     public void run(AiTaskAddRequest aiTaskAddRequest) throws IOException, InterruptedException {
+        File ldmDir = new File("/workspace/Dreambooth-Stable-Diffusion/scripts/ldm");
+        if (!ldmDir.exists()) {
+            commandExecutor.execResult(3600, TimeUnit.SECONDS, "cp -r /workspace/Dreambooth-Stable-Diffusion/ldm /workspace/Dreambooth-Stable-Diffusion/scripts/");
+        }
+
         StringBuffer cmd = new StringBuffer();
         cmd.append("python /workspace/Dreambooth-Stable-Diffusion/scripts/stable_txt2img.py ");
         cmd.append("--seed 10  ");
@@ -31,9 +37,7 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
         cmd.append("--ddim_steps 50 ");
         cmd.append("--ckpt /workspace/logs/Marcos_Images2022-11-17T04-01-14_\"marcos\"/checkpoints/last.ckpt ");
         cmd.append("--prompt \"marcos anime\"");
-
-
-        commandExecutor.execResult(10, TimeUnit.SECONDS, cmd.toString(), new CommandExecutor.CommondListener() {
+        commandExecutor.execResult(3600, TimeUnit.SECONDS, cmd.toString(), new CommandExecutor.CommondListener() {
             @Override
             public void onStdout(String str) {
                 log.info(str);

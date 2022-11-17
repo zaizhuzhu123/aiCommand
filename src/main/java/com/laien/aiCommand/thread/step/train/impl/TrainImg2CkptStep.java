@@ -39,7 +39,7 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
         cmd.append("--class_word \"person\" ");
         cmd.append("--token marcos ");
         cmd.append("--no-test");
-        commandExecutor.execResult(10, TimeUnit.SECONDS, cmd.toString(), new CommandExecutor.CommondListener() {
+        commandExecutor.execResult(3600, TimeUnit.SECONDS, cmd.toString(), new CommandExecutor.CommondListener() {
             @Override
             public void onStdout(String str) {
                 if (str.contains("Epoch 0:") && str.contains("[")) {
