@@ -2,6 +2,7 @@ package com.laien.aiCommand.thread.step.train.impl;
 
 import com.laien.aiCommand.config.AppliacationInfo;
 import com.laien.aiCommand.entity.AiTask;
+import com.laien.aiCommand.entity.AiTaskStep;
 import com.laien.aiCommand.request.AiTaskAddRequest;
 import com.laien.aiCommand.schedule.impl.process.util.CommandExecutor;
 import com.laien.aiCommand.thread.step.train.DreamBoothTrainStep;
@@ -27,7 +28,7 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
     private CommandExecutor commandExecutor;
 
     @Override
-    public void run(AiTask aiTask) throws IOException, InterruptedException {
+    public void run(AiTask aiTask, AiTaskStep currentStep) throws IOException, InterruptedException {
         int training_step = 500;
         StringBuffer cmd = new StringBuffer();
         cmd.append("python " + dreamboothPath + "/main.py ");
@@ -76,6 +77,7 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
 //                        long finishRemainingSeconds = (long) (finishRate * traingingStepTotalSeconds) + 60 * 3;
                         long finishRemainingSeconds = (long) (finishRate * traingingStepTotalSeconds);
                         log.info("finishRemainingSeconds:" + finishRemainingSeconds);
+                        currentStep.setRemainingFinishTime(finishRemainingSeconds);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

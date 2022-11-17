@@ -1,6 +1,7 @@
 package com.laien.aiCommand.thread.step.dreambooth.impl;
 
 import com.laien.aiCommand.entity.AiTask;
+import com.laien.aiCommand.entity.AiTaskStep;
 import com.laien.aiCommand.schedule.impl.process.util.CommandExecutor;
 import com.laien.aiCommand.thread.step.dreambooth.InstallDreamBoothStep;
 import lombok.extern.slf4j.Slf4j;
@@ -22,11 +23,12 @@ public class HuggingfaceLoginStep implements InstallDreamBoothStep {
     private CommandExecutor commandExecutor;
 
     @Override
-    public void run(AiTask aiTask) throws IOException, InterruptedException {
+    public void run(AiTask aiTask, AiTaskStep currentStep) throws IOException, InterruptedException {
         log.info("-------------------------------------------");
         log.info(this.getClass().getSimpleName());
         String cmd = "sh /workspace/aiCommand/target/soft/shell/huggingFaceLogin.sh";
         commandExecutor.execResult(10, TimeUnit.SECONDS, cmd);
+        currentStep.setRemainingFinishTime(currentStep.getRemainingFinishTime() - 600);
     }
 
     @Override

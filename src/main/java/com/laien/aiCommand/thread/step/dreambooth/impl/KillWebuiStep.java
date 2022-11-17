@@ -1,6 +1,7 @@
 package com.laien.aiCommand.thread.step.dreambooth.impl;
 
 import com.laien.aiCommand.entity.AiTask;
+import com.laien.aiCommand.entity.AiTaskStep;
 import com.laien.aiCommand.schedule.impl.process.util.CommandExecutor;
 import com.laien.aiCommand.thread.step.ProcessStep;
 import com.laien.aiCommand.thread.step.dreambooth.InstallDreamBoothStep;
@@ -23,7 +24,7 @@ public class KillWebuiStep implements InstallDreamBoothStep {
     private CommandExecutor commandExecutor;
 
     @Override
-    public void run(AiTask aiTask) throws IOException, InterruptedException {
+    public void run(AiTask aiTask, AiTaskStep currentStep) throws IOException, InterruptedException {
         log.info("-------------------------------------------");
         log.info(this.getClass().getSimpleName());
         String cmd;
@@ -35,6 +36,7 @@ public class KillWebuiStep implements InstallDreamBoothStep {
         commandExecutor.execResult(30, TimeUnit.SECONDS, cmd);
         cmd = "sh /workspace/aiCommand/target/soft/shell/killWebui.sh";
         commandExecutor.execResult(30, TimeUnit.SECONDS, cmd);
+        currentStep.setRemainingFinishTime(currentStep.getRemainingFinishTime() - 600);
     }
 
     @Override

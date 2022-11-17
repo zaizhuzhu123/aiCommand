@@ -99,7 +99,7 @@ public class TaskRunThread extends Thread {
                 }
                 for (ProcessStep waitProcessStep : waitProcessSteps) {
                     log.info(stepName + "-" + waitProcessStep.getClass().getSimpleName());
-                    waitProcessStep.run(aiTask);
+                    waitProcessStep.run(aiTask, step);
                 }
                 aiTaskService.setStepFinish(step);
                 if (i != lastStepsIndex) {

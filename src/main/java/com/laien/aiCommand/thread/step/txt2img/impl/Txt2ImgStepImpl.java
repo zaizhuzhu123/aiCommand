@@ -1,6 +1,7 @@
 package com.laien.aiCommand.thread.step.txt2img.impl;
 
 import com.laien.aiCommand.entity.AiTask;
+import com.laien.aiCommand.entity.AiTaskStep;
 import com.laien.aiCommand.request.AiTaskAddRequest;
 import com.laien.aiCommand.schedule.impl.process.util.CommandExecutor;
 import com.laien.aiCommand.thread.step.txt2img.Txt2ImgStep;
@@ -26,7 +27,7 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
     private CommandExecutor commandExecutor;
 
     @Override
-    public void run(AiTask aiTask) throws IOException, InterruptedException {
+    public void run(AiTask aiTask, AiTaskStep currentStep) throws IOException, InterruptedException {
         File ldmDir = new File(dreamboothPath + "/scripts/ldm");
         if (!ldmDir.exists()) {
             commandExecutor.execResult(3600, TimeUnit.SECONDS, "cp -r " + dreamboothPath + "/ldm " + dreamboothPath + "/scripts/");
@@ -68,6 +69,7 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
                             log.info("seconds:" + seconds);
                             long totalSeconds = hour * 3600 + minutes * 60 + seconds;
                             log.info("finishRemainingSeconds:" + totalSeconds);
+                            currentStep.setRemainingFinishTime(totalSeconds);
                         }
                     }
                 }

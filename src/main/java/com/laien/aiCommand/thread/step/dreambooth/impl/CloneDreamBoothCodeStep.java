@@ -1,6 +1,7 @@
 package com.laien.aiCommand.thread.step.dreambooth.impl;
 
 import com.laien.aiCommand.entity.AiTask;
+import com.laien.aiCommand.entity.AiTaskStep;
 import com.laien.aiCommand.schedule.impl.process.util.CommandExecutor;
 import com.laien.aiCommand.thread.step.dreambooth.InstallDreamBoothStep;
 import lombok.extern.slf4j.Slf4j;
@@ -23,13 +24,14 @@ public class CloneDreamBoothCodeStep implements InstallDreamBoothStep {
     private CommandExecutor commandExecutor;
 
     @Override
-    public void run(AiTask aiTask) throws IOException, InterruptedException {
+    public void run(AiTask aiTask, AiTaskStep currentStep) throws IOException, InterruptedException {
         log.info("-------------------------------------------");
         log.info(this.getClass().getSimpleName());
         String cmd = "rm -rf " + dreamboothPath;
         commandExecutor.execResult(60, TimeUnit.SECONDS, cmd);
         cmd = "git clone https://github.com/zaizhuzhu123/Dreambooth-Stable-Diffusion.git " + dreamboothPath;
         commandExecutor.execResult(30, TimeUnit.SECONDS, cmd);
+        currentStep.setRemainingFinishTime(currentStep.getRemainingFinishTime() - 600);
     }
 
     @Override

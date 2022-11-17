@@ -2,6 +2,7 @@ package com.laien.aiCommand.thread.step.train.impl;
 
 import com.laien.aiCommand.config.AppliacationInfo;
 import com.laien.aiCommand.entity.AiTask;
+import com.laien.aiCommand.entity.AiTaskStep;
 import com.laien.aiCommand.thread.step.train.DreamBoothTrainStep;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -29,7 +30,7 @@ public class DownloadFirebaseImgStep implements DreamBoothTrainStep {
     private OkHttpClient okHttpClient;
 
     @Override
-    public void run(AiTask aiTask) throws IOException, InterruptedException {
+    public void run(AiTask aiTask, AiTaskStep currentStep) throws IOException, InterruptedException {
         List<String> firebaseImgs = aiTask.getRequestData().getFirebaseImgs();
         if (CollectionUtils.isNotEmpty(firebaseImgs)) {
             File taskDir = new File(AppliacationInfo.userImgSavePath);
