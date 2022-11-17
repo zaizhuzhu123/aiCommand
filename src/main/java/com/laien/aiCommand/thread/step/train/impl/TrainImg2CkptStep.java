@@ -31,8 +31,13 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
     public void run(AiTask aiTask, AiTaskStep currentStep) throws IOException, InterruptedException {
         int training_step = 100;
         StringBuffer cmd = new StringBuffer();
+        String ckptPath = AppliacationInfo.userTraingCkptPath.replace("{TASKID}", aiTask.getTaskId());
+        String projectName = StringUtils.substringAfterLast(ckptPath, "/");
+        String logDir = StringUtils.substringBeforeLast(ckptPath, "/");
         cmd.append("python " + dreamboothPath + "/main.py ");
         cmd.append("--base " + dreamboothPath + "/configs/stable-diffusion/v1-finetune_unfrozen.yaml ");
+        cmd.append("--logdir " + logDir + " ");
+        cmd.append("--project " + projectName + " ");
         cmd.append("-t ");
         cmd.append("--actual_resume " + dreamboothPath + "/model.ckpt ");
         cmd.append("--reg_data_root " + dreamboothPath + "/regularization_images/person_ddim ");

@@ -1,5 +1,6 @@
 package com.laien.aiCommand.thread.step.txt2img.impl;
 
+import com.laien.aiCommand.config.AppliacationInfo;
 import com.laien.aiCommand.entity.AiTask;
 import com.laien.aiCommand.entity.AiTaskStep;
 import com.laien.aiCommand.request.AiTaskAddRequest;
@@ -32,6 +33,7 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
         if (!ldmDir.exists()) {
             commandExecutor.execResult(3600, TimeUnit.SECONDS, "cp -r " + dreamboothPath + "/ldm " + dreamboothPath + "/scripts/");
         }
+        String ckptPath = AppliacationInfo.userTraingCkptPath.replace("{TASKID}", aiTask.getTaskId());
 
         StringBuffer cmd = new StringBuffer();
         cmd.append("python " + dreamboothPath + "/scripts/stable_txt2img.py ");
@@ -42,7 +44,7 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
         cmd.append("--n_iter 8 ");
         cmd.append("--scale 10.0 ");
         cmd.append("--ddim_steps 50 ");
-        cmd.append("--ckpt /workspace/logs/marcos_ckpt/checkpoints/last.ckpt ");
+        cmd.append("--ckpt " + ckptPath + "/checkpoints/last.ckpt ");
         cmd.append("--prompt marcos,anime ");
         commandExecutor.execResult(3600, TimeUnit.SECONDS, cmd.toString(), new CommandExecutor.CommondListener() {
             @Override
