@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.List;
 
+import static com.laien.aiCommand.config.AppliacationInfo.initEnvironment;
 import static com.laien.aiCommand.constant.TaskConstant.TASK_STATUS_FINISH;
 import static com.laien.aiCommand.constant.TaskConstant.TASK_STATUS_WAIT;
 
@@ -79,7 +80,7 @@ public class TaskRunThread extends Thread {
             }
             if (step.getStatus().intValue() == TASK_STATUS_WAIT) {
                 List<ProcessStep> waitProcessSteps = step.getProcessSteps();
-                if (CollectionUtils.isEmpty(waitProcessSteps)) {
+                if (CollectionUtils.isEmpty(waitProcessSteps) || step == initEnvironment) {
                     return false;
                 }
                 for (ProcessStep waitProcessStep : waitProcessSteps) {

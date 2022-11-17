@@ -56,6 +56,7 @@ public class AiTask {
         this.requestData = requestData;
         this.steps = steps;
         this.taskCreateTime = new Date(System.currentTimeMillis());
+        this.setStatus(TASK_STATUS_PROCESS);
 
         IProcessStepService processStepService = AppliacationInfo.applicationContext.getBean(IProcessStepService.class);
         for (AiTaskStep step : this.steps) {
