@@ -6,9 +6,9 @@ import com.laien.aiCommand.entity.AiTask;
 import com.laien.aiCommand.entity.AiTaskStep;
 import com.laien.aiCommand.service.IAiTaskService;
 import com.laien.aiCommand.thread.step.ProcessStep;
-import com.laien.aiCommand.thread.step.dreambooth.InstallDreamBoothStep;
 import com.laien.aiCommand.thread.step.train.DreamBoothTrainStep;
 import com.laien.aiCommand.thread.step.txt2img.Txt2ImgStep;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +21,7 @@ import java.util.Map;
 import static com.laien.aiCommand.constant.TaskConstant.*;
 
 @Component
+@Slf4j
 public class TaskRunThread extends Thread {
 
     @Resource
@@ -41,6 +42,7 @@ public class TaskRunThread extends Thread {
 
     @Override
     public void run() {
+        log.info("任务现成启动");
         List<ProcessStep> trains = Lists.newArrayList();
         trains.addAll(dreamBoothTrainStep);
         processes.put(TASK_STEP_TYPE_TRAING, trains);
@@ -51,6 +53,7 @@ public class TaskRunThread extends Thread {
             try {
                 AiTask nextTask = aiTaskService.getNextTask();
                 if (nextTask != null) {
+                    log.info("得到任务" + nextTask.getTaskId());
                     //必须前一个任务完成 才执行下一个任务
                     while (true) {
                         try {
