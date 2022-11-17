@@ -49,6 +49,7 @@ public class AiTaskServiceImpl implements IAiTaskService {
     public void setTaskFinish(AiTask aiTask) {
         aiTask.setStatus(TASK_STATUS_FINISH);
         aiTask.setRealCompletionTime(new Date());
+
     }
 
 
