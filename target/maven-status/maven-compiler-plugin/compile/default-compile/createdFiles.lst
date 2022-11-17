@@ -15,7 +15,6 @@ com/laien/aiCommand/thread/step/train/DreamBoothTrainStep.class
 com/laien/aiCommand/controller/base/ResponseResult.class
 com/laien/aiCommand/request/AiTaskAddRequest.class
 com/laien/aiCommand/schedule/impl/process/util/CommandExecutor$2.class
-com/laien/aiCommand/thread/step/dreambooth/impl/DownloadRegularizationStep$1.class
 com/laien/aiCommand/controller/base/ResponseController.class
 com/laien/aiCommand/mapper/TaskMapper.class
 com/laien/aiCommand/thread/SendHeartBeatThread.class
