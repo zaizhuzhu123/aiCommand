@@ -120,6 +120,18 @@ public class CommandExecutor {
                     }
                 }
             }
+
+            @Override
+            public void onExit(int exitCode, NonBlockingProcess process) {
+                super.onExit(exitCode, process);
+                listener.onExit(exitCode);
+            }
+
+            @Override
+            public void onError(Exception exception, NonBlockingProcess process, boolean existing) {
+                super.onError(exception, process, existing);
+                listener.onError(exception);
+            }
         });
         if (timeout == 0) {
             process.waitFor();
