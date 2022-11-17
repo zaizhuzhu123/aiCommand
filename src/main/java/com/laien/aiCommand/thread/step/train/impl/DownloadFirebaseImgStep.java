@@ -1,7 +1,7 @@
 package com.laien.aiCommand.thread.step.train.impl;
 
 import com.laien.aiCommand.config.AppliacationInfo;
-import com.laien.aiCommand.request.AiTaskAddRequest;
+import com.laien.aiCommand.entity.AiTask;
 import com.laien.aiCommand.thread.step.train.DreamBoothTrainStep;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+import static com.laien.aiCommand.constant.TaskConstant.TASK_STEP_TYPE_TRAING;
+
 @Component
 @Order(1)
 public class DownloadFirebaseImgStep implements DreamBoothTrainStep {
@@ -27,8 +29,8 @@ public class DownloadFirebaseImgStep implements DreamBoothTrainStep {
     private OkHttpClient okHttpClient;
 
     @Override
-    public void run(AiTaskAddRequest aiTaskAddRequest) throws IOException, InterruptedException {
-        List<String> firebaseImgs = aiTaskAddRequest.getFirebaseImgs();
+    public void run(AiTask aiTask) throws IOException, InterruptedException {
+        List<String> firebaseImgs = aiTask.getRequestData().getFirebaseImgs();
         if (CollectionUtils.isNotEmpty(firebaseImgs)) {
             File taskDir = new File(AppliacationInfo.userImgSavePath);
             if (!taskDir.exists()) {
@@ -44,6 +46,11 @@ public class DownloadFirebaseImgStep implements DreamBoothTrainStep {
                 IOUtils.write(fileBytes, new FileOutputStream(file));
             }
         }
+    }
+
+    @Override
+    public String type() {
+        return TASK_STEP_TYPE_TRAING;
     }
 
     private byte[] getFileBytes(String imgUrl) throws IOException {

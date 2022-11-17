@@ -1,14 +1,18 @@
 package com.laien.aiCommand.constant;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+public interface TaskConstant {
 
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Map;
 
-public interface MediaConstant {
+    public final static Integer TASK_STATUS_WAIT = 0;
+    public final static Integer TASK_STATUS_PROCESS = 1;
+    public final static Integer TASK_STATUS_FINISH = 2;
+    public final static Integer TASK_STATUS_FAIL = 3;
+
+
+    public final static String TASK_STEP_TYPE_INITENO = "INITENVIRONMENT";
+    public final static String TASK_STEP_TYPE_TRAING = "TRAING";
+    public final static String TASK_STEP_TYPE_GENERATE = "GENERATE";
+
 
 //    /**
 //     * 压缩文件类型

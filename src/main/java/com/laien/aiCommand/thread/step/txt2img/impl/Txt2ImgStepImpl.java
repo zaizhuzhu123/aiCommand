@@ -1,5 +1,6 @@
 package com.laien.aiCommand.thread.step.txt2img.impl;
 
+import com.laien.aiCommand.entity.AiTask;
 import com.laien.aiCommand.request.AiTaskAddRequest;
 import com.laien.aiCommand.schedule.impl.process.util.CommandExecutor;
 import com.laien.aiCommand.thread.step.txt2img.Txt2ImgStep;
@@ -13,26 +14,29 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import static com.laien.aiCommand.config.AppliacationInfo.dreamboothPath;
+import static com.laien.aiCommand.constant.TaskConstant.TASK_STEP_TYPE_GENERATE;
+
 @Slf4j
 @Component
-@Order(2)
+@Order(1)
 public class Txt2ImgStepImpl implements Txt2ImgStep {
 
     @Resource
     private CommandExecutor commandExecutor;
 
     @Override
-    public void run(AiTaskAddRequest aiTaskAddRequest) throws IOException, InterruptedException {
-        File ldmDir = new File("/workspace/Dreambooth-Stable-Diffusion/scripts/ldm");
+    public void run(AiTask aiTask) throws IOException, InterruptedException {
+        File ldmDir = new File(dreamboothPath + "/scripts/ldm");
         if (!ldmDir.exists()) {
-            commandExecutor.execResult(3600, TimeUnit.SECONDS, "cp -r /workspace/Dreambooth-Stable-Diffusion/ldm /workspace/Dreambooth-Stable-Diffusion/scripts/");
+            commandExecutor.execResult(3600, TimeUnit.SECONDS, "cp -r " + dreamboothPath + "/ldm " + dreamboothPath + "/scripts/");
         }
 
         StringBuffer cmd = new StringBuffer();
-        cmd.append("python /workspace/Dreambooth-Stable-Diffusion/scripts/stable_txt2img.py ");
+        cmd.append("python " + dreamboothPath + "/scripts/stable_txt2img.py ");
         cmd.append("--seed 10  ");
         cmd.append("--ddim_eta 0.0 ");
-        cmd.append("--config /workspace/Dreambooth-Stable-Diffusion/configs/stable-diffusion/v1-inference.yaml ");
+        cmd.append("--config " + dreamboothPath + "/configs/stable-diffusion/v1-inference.yaml ");
         cmd.append("--n_samples 1 ");
         cmd.append("--n_iter 8 ");
         cmd.append("--scale 10.0 ");
@@ -80,5 +84,10 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
                 exception.printStackTrace();
             }
         });
+    }
+
+    @Override
+    public String type() {
+        return TASK_STEP_TYPE_GENERATE;
     }
 }

@@ -1,10 +1,9 @@
 package com.laien.aiCommand.thread.step.train;
 
-import com.laien.aiCommand.request.AiTaskAddRequest;
+import com.laien.aiCommand.thread.step.ProcessStep;
 
-import java.io.IOException;
+import static com.laien.aiCommand.constant.TaskConstant.TASK_STEP_TYPE_TRAING;
 
-public interface DreamBoothTrainStep {
-
-    public void run(AiTaskAddRequest aiTaskAddRequest) throws IOException, InterruptedException;
+public interface DreamBoothTrainStep extends ProcessStep {
+    
 }

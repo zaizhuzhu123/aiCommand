@@ -1,7 +1,7 @@
 com/laien/aiCommand/controller/MacUtils.class
 com/laien/aiCommand/schedule/impl/process/util/CommandExecutor$CommondListener.class
 com/laien/aiCommand/config/Knife4jConfiguration.class
-com/laien/aiCommand/constant/MediaConstant.class
+com/laien/aiCommand/thread/TaskRunThread.class
 com/laien/aiCommand/thread/InstallDreamEnvThread.class
 com/laien/aiCommand/thread/step/dreambooth/impl/KillWebuiStep.class
 com/laien/aiCommand/schedule/impl/process/util/CommandExecutor.class
@@ -11,15 +11,19 @@ com/laien/aiCommand/entity/Task.class
 com/laien/aiCommand/entity/base/BaseModel.class
 com/laien/aiCommand/schedule/impl/process/util/SourceFileParseUtils.class
 com/laien/aiCommand/config/OKHttpConfig.class
+com/laien/aiCommand/service/impl/AiTaskServiceImpl.class
 com/laien/aiCommand/callback/CallBackReq.class
 com/laien/aiCommand/thread/step/train/DreamBoothTrainStep.class
 com/laien/aiCommand/controller/base/ResponseResult.class
+com/laien/aiCommand/constant/TaskConstant.class
 com/laien/aiCommand/request/AiTaskAddRequest.class
 com/laien/aiCommand/schedule/impl/process/util/CommandExecutor$2.class
 com/laien/aiCommand/controller/base/ResponseController.class
+com/laien/aiCommand/entity/AiTask.class
 com/laien/aiCommand/mapper/TaskMapper.class
 com/laien/aiCommand/thread/SendHeartBeatThread.class
 com/laien/aiCommand/thread/step/txt2img/Txt2ImgStep.class
+com/laien/aiCommand/entity/AiTaskStep.class
 com/laien/aiCommand/controller/TestController.class
 com/laien/aiCommand/thread/step/txt2img/impl/Txt2ImgStepImpl$1.class
 com/laien/aiCommand/schedule/impl/process/util/CommandExecutor$3.class
@@ -30,6 +34,7 @@ com/laien/aiCommand/config/AppliacationInfo.class
 com/laien/aiCommand/thread/step/train/impl/DownloadFirebaseImgStep.class
 com/laien/aiCommand/controller/base/ResponseCode.class
 com/laien/aiCommand/thread/step/dreambooth/impl/CloneDreamBoothCodeStep.class
+com/laien/aiCommand/service/IAiTaskService.class
 com/laien/aiCommand/thread/step/dreambooth/InstallDreamBoothStep.class
 com/laien/aiCommand/thread/step/dreambooth/impl/DownloadCkptStep.class
 com/laien/aiCommand/config/CorsConfig.class

@@ -1,6 +1,7 @@
 package com.laien.aiCommand.thread.step.train.impl;
 
 import com.laien.aiCommand.config.AppliacationInfo;
+import com.laien.aiCommand.entity.AiTask;
 import com.laien.aiCommand.request.AiTaskAddRequest;
 import com.laien.aiCommand.schedule.impl.process.util.CommandExecutor;
 import com.laien.aiCommand.thread.step.train.DreamBoothTrainStep;
@@ -14,6 +15,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import static com.laien.aiCommand.config.AppliacationInfo.dreamboothPath;
+import static com.laien.aiCommand.constant.TaskConstant.TASK_STEP_TYPE_TRAING;
+
 @Component
 @Order(2)
 @Slf4j
@@ -23,15 +27,14 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
     private CommandExecutor commandExecutor;
 
     @Override
-    public void run(AiTaskAddRequest aiTaskAddRequest) throws IOException, InterruptedException {
-        File userImgDir = new File(AppliacationInfo.userImgSavePath);
+    public void run(AiTask aiTask) throws IOException, InterruptedException {
         int training_step = 500;
         StringBuffer cmd = new StringBuffer();
-        cmd.append("python /workspace/Dreambooth-Stable-Diffusion/main.py ");
-        cmd.append("--base /workspace/Dreambooth-Stable-Diffusion/configs/stable-diffusion/v1-finetune_unfrozen.yaml ");
+        cmd.append("python " + dreamboothPath + "/main.py ");
+        cmd.append("--base " + dreamboothPath + "/configs/stable-diffusion/v1-finetune_unfrozen.yaml ");
         cmd.append("-t ");
-        cmd.append("--actual_resume /workspace/Dreambooth-Stable-Diffusion/model.ckpt ");
-        cmd.append("--reg_data_root /workspace/Dreambooth-Stable-Diffusion/regularization_images/person_ddim ");
+        cmd.append("--actual_resume " + dreamboothPath + "/model.ckpt ");
+        cmd.append("--reg_data_root " + dreamboothPath + "/regularization_images/person_ddim ");
         cmd.append("-n \"marcos\" ");
         cmd.append("--gpus 0, ");
         cmd.append("--data_root /workspace/Marcos_Images ");
@@ -91,6 +94,11 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
             }
         });
 
+    }
+
+    @Override
+    public String type() {
+        return TASK_STEP_TYPE_TRAING;
     }
 
     public static void main(String[] args) {

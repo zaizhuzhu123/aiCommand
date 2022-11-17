@@ -29,7 +29,7 @@ public class Init {
         //调用心跳接口 将任务id汇报给程序1 代表程序2启动成功
         sendHeartBeatThread.start();
         //初始化计算环境
-//        installStableDiffusionEnvThread.start();
+        installStableDiffusionEnvThread.start();
     }
 
 //    @Override

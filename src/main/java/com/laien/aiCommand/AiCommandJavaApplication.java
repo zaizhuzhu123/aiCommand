@@ -28,7 +28,7 @@ public class AiCommandJavaApplication {
 
     public static void main(String[] args) {
         if (args != null & args.length > 0) {
-            AppliacationInfo.currentTaskId = args[0];
+            AppliacationInfo.machineId = args[0];
         }
         SpringApplication.run(AiCommandJavaApplication.class, args);
     }
