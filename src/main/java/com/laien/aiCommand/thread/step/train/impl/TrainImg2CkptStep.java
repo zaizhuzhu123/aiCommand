@@ -56,7 +56,7 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
                         log.info("seconds:" + seconds);
                         long totalSeconds = minutes * 60 + seconds;
                         log.info("totalSeconds:" + totalSeconds);
-                        long finishRemainingSeconds = (long) ((double) ((training_step - finishStep) / training_step) * totalSeconds);
+                        long finishRemainingSeconds = (long) (((training_step - finishStep) / (training_step * 1.0d)) * totalSeconds);
                         log.info("finishRemainingSeconds:" + finishRemainingSeconds);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -76,5 +76,9 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
             }
         });
 
+    }
+
+    public static void main(String[] args) {
+        System.out.println((long) (((500 - 100) / (500 * 1.0d)) * 2000));
     }
 }
