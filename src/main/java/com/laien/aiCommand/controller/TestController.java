@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 
 @Component
@@ -30,6 +31,7 @@ public class TestController extends ResponseController {
         return succ("Hello World!,machineID=" + AppliacationInfo.machineId);
     }
 
+    @Resource
     private IAiTaskService aiTaskService;
 
     @PostMapping("/trainingAndgenerate")

@@ -28,7 +28,7 @@ public class CloneDreamBoothCodeStep implements InstallDreamBoothStep {
         log.info(this.getClass().getSimpleName());
         String cmd = "rm -rf " + dreamboothPath;
         commandExecutor.execResult(60, TimeUnit.SECONDS, cmd);
-        cmd = "git clone https://github.com/JoePenna/Dreambooth-Stable-Diffusion " + dreamboothPath;
+        cmd = "git clone https://github.com/zaizhuzhu123/Dreambooth-Stable-Diffusion.git " + dreamboothPath;
         commandExecutor.execResult(30, TimeUnit.SECONDS, cmd);
     }
 
