@@ -25,6 +25,7 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
     @Override
     public void run(AiTaskAddRequest aiTaskAddRequest) throws IOException, InterruptedException {
         File userImgDir = new File(AppliacationInfo.userImgSavePath);
+        int training_step = 500;
         StringBuffer cmd = new StringBuffer();
         cmd.append("python /workspace/Dreambooth-Stable-Diffusion/main.py ");
         cmd.append("--base /workspace/Dreambooth-Stable-Diffusion/configs/stable-diffusion/v1-finetune_unfrozen.yaml ");
@@ -34,7 +35,7 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
         cmd.append("-n \"marcos\" ");
         cmd.append("--gpus 0, ");
         cmd.append("--data_root /workspace/Marcos_Images ");
-        cmd.append("--max_training_steps 500 ");
+        cmd.append("--max_training_steps " + training_step + " ");
         cmd.append("--class_word \"person\" ");
         cmd.append("--token \"marcos\" ");
         cmd.append("--no-test");
@@ -55,7 +56,7 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
                         log.info("seconds:" + seconds);
                         long totalSeconds = minutes * 60 + seconds;
                         log.info("totalSeconds:" + totalSeconds);
-                        long finishRemainingSeconds = (long) ((double) (finishStep / 500.0) * totalSeconds);
+                        long finishRemainingSeconds = (long) ((double) ((training_step - finishStep) / training_step) * totalSeconds);
                         log.info("finishRemainingSeconds:" + finishRemainingSeconds);
                     } catch (Exception e) {
                         e.printStackTrace();
