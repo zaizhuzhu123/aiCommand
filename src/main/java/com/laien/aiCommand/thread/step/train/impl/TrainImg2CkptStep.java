@@ -25,7 +25,7 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
     public void run(AiTaskAddRequest aiTaskAddRequest) throws IOException, InterruptedException {
         File userImgDir = new File(AppliacationInfo.userImgSavePath);
         StringBuffer cmd = new StringBuffer();
-        cmd.append("python \"/workspace/Dreambooth-Stable-Diffusion/main.py\" ");
+        cmd.append("python /workspace/Dreambooth-Stable-Diffusion/main.py ");
         cmd.append("--base /workspace/Dreambooth-Stable-Diffusion/configs/stable-diffusion/v1-finetune_unfrozen.yaml ");
         cmd.append("-t ");
         cmd.append("--actual_resume /workspace/Dreambooth-Stable-Diffusion/model.ckpt ");
