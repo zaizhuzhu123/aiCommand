@@ -6,6 +6,7 @@ com/laien/aiCommand/thread/InstallDreamEnvThread.class
 com/laien/aiCommand/thread/step/dreambooth/impl/KillWebuiStep.class
 com/laien/aiCommand/schedule/impl/process/util/CommandExecutor.class
 com/laien/aiCommand/schedule/impl/process/util/SourceFileInfo.class
+com/laien/aiCommand/thread/step/txt2img/impl/Txt2ImgStepImpl.class
 com/laien/aiCommand/entity/Task.class
 com/laien/aiCommand/entity/base/BaseModel.class
 com/laien/aiCommand/schedule/impl/process/util/SourceFileParseUtils.class
@@ -20,6 +21,7 @@ com/laien/aiCommand/mapper/TaskMapper.class
 com/laien/aiCommand/thread/SendHeartBeatThread.class
 com/laien/aiCommand/thread/step/txt2img/Txt2ImgStep.class
 com/laien/aiCommand/controller/TestController.class
+com/laien/aiCommand/thread/step/txt2img/impl/Txt2ImgStepImpl$1.class
 com/laien/aiCommand/schedule/impl/process/util/CommandExecutor$3.class
 com/laien/aiCommand/init/Init.class
 com/laien/aiCommand/thread/step/dreambooth/impl/HuggingfaceLoginStep.class

@@ -32,6 +32,7 @@
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/controller/TestController.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/thread/step/dreambooth/impl/DownloadCkptStep.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/controller/base/ResponseResult.java
+/Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/thread/step/txt2img/impl/Txt2ImgStepImpl.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/controller/FileController.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/config/AppliacationInfo.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/schedule/impl/process/TaskCompressionActuatorByVideo.java

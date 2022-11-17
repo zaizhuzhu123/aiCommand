@@ -1,6 +1,11 @@
 package com.laien.aiCommand.thread.step.txt2img;
 
-import com.laien.aiCommand.thread.step.ProcessStep;
+import com.laien.aiCommand.request.AiTaskAddRequest;
 
-public interface Txt2ImgStep extends ProcessStep {
+import java.io.IOException;
+
+public interface Txt2ImgStep {
+
+    public void run(AiTaskAddRequest aiTaskAddRequest) throws IOException, InterruptedException;
+
 }

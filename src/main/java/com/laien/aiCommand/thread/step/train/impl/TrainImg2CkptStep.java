@@ -37,7 +37,7 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
         cmd.append("--data_root /workspace/Marcos_Images ");
         cmd.append("--max_training_steps " + training_step + " ");
         cmd.append("--class_word \"person\" ");
-        cmd.append("--token \"marcos\" ");
+        cmd.append("--token marcos ");
         cmd.append("--no-test");
         commandExecutor.execResult(10, TimeUnit.SECONDS, cmd.toString(), new CommandExecutor.CommondListener() {
             @Override
@@ -69,7 +69,8 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
                         long totalSeconds = hour * 3600 + minutes * 60 + seconds;
                         long traingingStepTotalSeconds = (long) (totalSeconds * (training_step / (totalStep * 1.0d)));
                         log.info("totalSeconds:" + totalSeconds);
-                        long finishRemainingSeconds = (long) (finishRate * traingingStepTotalSeconds);
+                        //预留三分钟保险
+                        long finishRemainingSeconds = (long) (finishRate * traingingStepTotalSeconds) + 60 * 3;
                         log.info("finishRemainingSeconds:" + finishRemainingSeconds);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -80,12 +81,12 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
 
             @Override
             public void onExit(int exitCode) {
-
+                log.info("exitCode:" + exitCode);
             }
 
             @Override
             public void onError(Exception exception) {
-
+                exception.printStackTrace();
             }
         });
 

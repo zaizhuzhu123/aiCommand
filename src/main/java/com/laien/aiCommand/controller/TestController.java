@@ -6,6 +6,7 @@ import com.laien.aiCommand.controller.base.ResponseController;
 import com.laien.aiCommand.controller.base.ResponseResult;
 import com.laien.aiCommand.request.AiTaskAddRequest;
 import com.laien.aiCommand.thread.step.train.DreamBoothTrainStep;
+import com.laien.aiCommand.thread.step.txt2img.Txt2ImgStep;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.collections.CollectionUtils;
@@ -50,12 +51,18 @@ public class TestController extends ResponseController {
     @Resource
     private List<DreamBoothTrainStep> dreamBoothTrainSteps;
 
+    @Resource
+    private List<Txt2ImgStep> txt2ImgSteps;
+
     @PostMapping("/trainingAndgenerate")
     @ApiOperation(value = "训练加生成")
     public ResponseResult<String> add(AiTaskAddRequest aiTaskAddRequest) throws IOException, InterruptedException {
         if (CollectionUtils.isNotEmpty(dreamBoothTrainSteps)) {
-            for (DreamBoothTrainStep dreamBoothTrainStep : dreamBoothTrainSteps) {
-                dreamBoothTrainStep.run(aiTaskAddRequest);
+//            for (DreamBoothTrainStep dreamBoothTrainStep : dreamBoothTrainSteps) {
+//                dreamBoothTrainStep.run(aiTaskAddRequest);
+//            }
+            for (Txt2ImgStep txt2ImgStep : txt2ImgSteps) {
+                txt2ImgStep.run(aiTaskAddRequest);
             }
         }
         return succ("Hello World!");
