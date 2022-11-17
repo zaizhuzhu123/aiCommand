@@ -89,3 +89,17 @@ laien:
   aiManager:
     heartbeat:
       url: http://www.baidu.com
+
+firebase:
+  project: aiCommand-dev
+  json:
+    file: test-project-33489-firebase-adminsdk-y6zj8-f9e9fdda16.json
+  bucket:
+    name: test-project-33489.appspot.com
+    # 一定要以/结尾，代码里拼接
+    dir: ${firebase.project}/
+    url: https://firebasestorage.googleapis.com/v0/b/${firebase.bucket.name}/o
+    url-format: ${firebase.bucket.url}{0}
+
+  database:
+    url: https://test-project-33489.firebaseio.com

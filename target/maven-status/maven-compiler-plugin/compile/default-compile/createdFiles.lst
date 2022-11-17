@@ -3,6 +3,7 @@ com/laien/aiCommand/schedule/impl/process/util/CommandExecutor$CommondListener.c
 com/laien/aiCommand/config/Knife4jConfiguration.class
 com/laien/aiCommand/thread/TaskRunThread.class
 com/laien/aiCommand/thread/InstallDreamEnvThread.class
+com/laien/aiCommand/thread/step/uploadfirebase/UploadFirebaseStep.class
 com/laien/aiCommand/thread/step/dreambooth/impl/KillWebuiStep.class
 com/laien/aiCommand/schedule/impl/process/util/CommandExecutor.class
 com/laien/aiCommand/schedule/impl/process/util/SourceFileInfo.class
@@ -26,6 +27,7 @@ com/laien/aiCommand/thread/step/txt2img/Txt2ImgStep.class
 com/laien/aiCommand/entity/AiTaskStep.class
 com/laien/aiCommand/controller/TestController.class
 com/laien/aiCommand/thread/step/txt2img/impl/Txt2ImgStepImpl$1.class
+com/laien/aiCommand/config/FirebaseConfig.class
 com/laien/aiCommand/schedule/impl/process/util/CommandExecutor$3.class
 com/laien/aiCommand/init/Init.class
 com/laien/aiCommand/thread/step/dreambooth/impl/HuggingfaceLoginStep.class
@@ -35,9 +37,11 @@ com/laien/aiCommand/thread/step/train/impl/DownloadFirebaseImgStep.class
 com/laien/aiCommand/controller/base/ResponseCode.class
 com/laien/aiCommand/thread/step/dreambooth/impl/CloneDreamBoothCodeStep.class
 com/laien/aiCommand/service/IAiTaskService.class
+com/laien/aiCommand/service/IProcessStepService.class
 com/laien/aiCommand/thread/step/dreambooth/InstallDreamBoothStep.class
 com/laien/aiCommand/thread/step/dreambooth/impl/DownloadCkptStep.class
 com/laien/aiCommand/config/CorsConfig.class
+com/laien/aiCommand/service/impl/ProcessStepServiceImpl.class
 com/laien/aiCommand/thread/step/train/impl/TrainImg2CkptStep.class
 com/laien/aiCommand/schedule/impl/process/util/CommandExecutor$1.class
 com/laien/aiCommand/thread/step/dreambooth/impl/DownloadRegularizationStep.class

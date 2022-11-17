@@ -30,7 +30,7 @@ public class AiCommandJavaApplication {
         if (args != null & args.length > 0) {
             AppliacationInfo.machineId = args[0];
         }
-        SpringApplication.run(AiCommandJavaApplication.class, args);
+        AppliacationInfo.applicationContext = SpringApplication.run(AiCommandJavaApplication.class, args);
     }
 
     @Bean

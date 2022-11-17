@@ -1,6 +1,7 @@
 package com.laien.aiCommand.config;
 
 import com.laien.aiCommand.entity.AiTaskStep;
+import org.springframework.context.ApplicationContext;
 
 import static com.laien.aiCommand.constant.TaskConstant.TASK_STATUS_WAIT;
 import static com.laien.aiCommand.constant.TaskConstant.TASK_STEP_TYPE_INITENO;
@@ -19,6 +20,7 @@ public class AppliacationInfo {
     public static String userTraingCkptPath = taskPath + "/traingCkpt";
     public static String userGeneratePath = taskPath + "/generate";
     public static AiTaskStep initEnvironment = new AiTaskStep();
+    public static ApplicationContext applicationContext;
 
     static {
         initEnvironment.setStepName(TASK_STEP_TYPE_INITENO);

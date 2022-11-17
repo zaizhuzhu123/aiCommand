@@ -12,6 +12,7 @@ public interface TaskConstant {
     public final static String TASK_STEP_TYPE_INITENO = "INITENVIRONMENT";
     public final static String TASK_STEP_TYPE_TRAING = "TRAING";
     public final static String TASK_STEP_TYPE_GENERATE = "GENERATE";
+    public final static String TASK_STEP_TYPE_UPLOADIMG = "UPFIREBASE";
 
 
 //    /**

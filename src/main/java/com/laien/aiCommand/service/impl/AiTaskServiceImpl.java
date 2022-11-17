@@ -15,7 +15,7 @@ import static com.laien.aiCommand.constant.TaskConstant.TASK_STATUS_FINISH;
 @Component
 public class AiTaskServiceImpl implements IAiTaskService {
 
-    Map<String, AiTask> allAiTasks = Maps.newHashMap();
+    private Map<String, AiTask> allAiTasks = Maps.newHashMap();
 
 
     private LinkedBlockingQueue<AiTask> waitProcessAiTasks = new LinkedBlockingQueue<>(50);
@@ -48,7 +48,7 @@ public class AiTaskServiceImpl implements IAiTaskService {
     @Override
     public void setTaskFinish(AiTask aiTask) {
         aiTask.setStatus(TASK_STATUS_FINISH);
-        aiTask.setPlanCompletionTime(new Date());
+        aiTask.setRealCompletionTime(new Date());
     }
 
 

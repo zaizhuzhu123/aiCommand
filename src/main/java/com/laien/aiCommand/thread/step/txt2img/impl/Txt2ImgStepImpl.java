@@ -86,6 +86,7 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
                 exception.printStackTrace();
             }
         });
+        aiTask.setGenerateImgDirPath("/workspace/outputImgs");
     }
 
     @Override

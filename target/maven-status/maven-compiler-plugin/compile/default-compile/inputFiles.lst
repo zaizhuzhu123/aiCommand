@@ -1,3 +1,4 @@
+/Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/service/impl/ProcessStepServiceImpl.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/thread/step/dreambooth/impl/KillWebuiStep.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/schedule/TaskDispatcher.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/service/IAiTaskService.java
@@ -17,6 +18,7 @@
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/request/AiTaskAddRequest.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/schedule/impl/TaskDispatcherImpl.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/entity/AiTaskStep.java
+/Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/config/FirebaseConfig.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/thread/step/train/impl/DownloadFirebaseImgStep.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/thread/step/ProcessStep.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/config/Knife4jConfiguration.java
@@ -38,6 +40,7 @@
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/request/TaskAddReq.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/schedule/impl/process/util/SourceFileParseUtils.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/entity/base/BaseModel.java
+/Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/service/IProcessStepService.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/thread/step/txt2img/Txt2ImgStep.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/thread/step/dreambooth/impl/CloneDreamBoothCodeStep.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/constant/TaskConstant.java
@@ -47,6 +50,7 @@
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/thread/TaskRunThread.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/config/CorsConfig.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/controller/base/ResponseCode.java
+/Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/thread/step/uploadfirebase/UploadFirebaseStep.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/thread/step/dreambooth/impl/DownloadRegularizationStep.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/entity/AiTask.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/thread/step/train/DreamBoothTrainStep.java

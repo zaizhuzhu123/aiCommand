@@ -1,13 +1,10 @@
 package com.laien.aiCommand.thread;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.laien.aiCommand.entity.AiTask;
 import com.laien.aiCommand.entity.AiTaskStep;
 import com.laien.aiCommand.service.IAiTaskService;
 import com.laien.aiCommand.thread.step.ProcessStep;
 import com.laien.aiCommand.thread.step.train.DreamBoothTrainStep;
-import com.laien.aiCommand.thread.step.txt2img.Txt2ImgStep;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Component;
@@ -16,24 +13,18 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
-import static com.laien.aiCommand.constant.TaskConstant.*;
+import static com.laien.aiCommand.constant.TaskConstant.TASK_STATUS_FINISH;
+import static com.laien.aiCommand.constant.TaskConstant.TASK_STATUS_WAIT;
 
 @Component
 @Slf4j
 public class TaskRunThread extends Thread {
 
-    @Resource
-    private List<DreamBoothTrainStep> dreamBoothTrainStep;
-
-    @Resource
-    private List<Txt2ImgStep> txt2ImgStep;
 
     @Resource
     private IAiTaskService aiTaskService;
 
-    private Map<String, List<ProcessStep>> processes = Maps.newHashMap();
 
     @PostConstruct
     public void startThread() {
@@ -43,12 +34,6 @@ public class TaskRunThread extends Thread {
     @Override
     public void run() {
         log.info("任务现成启动");
-        List<ProcessStep> trains = Lists.newArrayList();
-        trains.addAll(dreamBoothTrainStep);
-        processes.put(TASK_STEP_TYPE_TRAING, trains);
-        List<ProcessStep> generate = Lists.newArrayList();
-        generate.addAll(txt2ImgStep);
-        processes.put(TASK_STEP_TYPE_GENERATE, generate);
         while (true) {
             try {
                 AiTask nextTask = aiTaskService.getNextTask();
@@ -93,7 +78,7 @@ public class TaskRunThread extends Thread {
                 continue;
             }
             if (step.getStatus().intValue() == TASK_STATUS_WAIT) {
-                List<ProcessStep> waitProcessSteps = processes.get(step.getStepName());
+                List<ProcessStep> waitProcessSteps = step.getProcessSteps();
                 if (CollectionUtils.isEmpty(waitProcessSteps)) {
                     return false;
                 }
