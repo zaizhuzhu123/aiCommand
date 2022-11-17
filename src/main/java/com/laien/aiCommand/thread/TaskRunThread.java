@@ -87,12 +87,18 @@ public class TaskRunThread extends Thread {
         int lastStepsIndex = steps.size() - 1;
         for (int i = 0; i < steps.size(); i++) {
             AiTaskStep step = steps.get(i);
+            String stepName = step.getStepName();
+            log.info(stepName);
+            if (step.getStatus().intValue() == TASK_STATUS_FINISH) {
+                continue;
+            }
             if (step.getStatus().intValue() == TASK_STATUS_WAIT) {
                 List<ProcessStep> waitProcessSteps = processes.get(step.getStepName());
                 if (CollectionUtils.isEmpty(waitProcessSteps)) {
                     return false;
                 }
                 for (ProcessStep waitProcessStep : waitProcessSteps) {
+                    log.info(stepName + "-" + waitProcessStep.getClass().getSimpleName());
                     waitProcessStep.run(aiTask);
                 }
                 aiTaskService.setStepFinish(step);
