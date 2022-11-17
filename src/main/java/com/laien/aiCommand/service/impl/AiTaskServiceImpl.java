@@ -31,7 +31,7 @@ public class AiTaskServiceImpl implements IAiTaskService {
 
     @Override
     public AiTask getTask(String taskId) {
-        return null;
+        return allAiTasks.get(taskId);
     }
 
     @Override
