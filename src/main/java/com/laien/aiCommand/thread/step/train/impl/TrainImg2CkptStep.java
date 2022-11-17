@@ -29,10 +29,10 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
         cmd.append("--base /workspace/Dreambooth-Stable-Diffusion/configs/stable-diffusion/v1-finetune_unfrozen.yaml ");
         cmd.append("-t ");
         cmd.append("--actual_resume /workspace/Dreambooth-Stable-Diffusion/model.ckpt ");
-        cmd.append("--reg_data_root \"/workspace/Dreambooth-Stable-Diffusion/regularization_images/person_ddim\" ");
+        cmd.append("--reg_data_root /workspace/Dreambooth-Stable-Diffusion/regularization_images/person ");
         cmd.append("-n \"marcos\" ");
         cmd.append("--gpus 0, ");
-        cmd.append("--data_root \"/workspace/Marcos_Images\" ");
+        cmd.append("--data_root /workspace/Marcos_Images ");
         cmd.append("--max_training_steps 500 ");
         cmd.append("--class_word \"person\" ");
         cmd.append("--token \"marcos\" ");
