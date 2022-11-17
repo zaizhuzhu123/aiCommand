@@ -50,11 +50,21 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
                         String totalTime = StringUtils.substringBefore(StringUtils.substringAfterLast(str, "["), ",").split("<")[1];
                         log.info("totalTime:" + totalTime);
                         String[] timeStrs = totalTime.split(":");
-                        int minutes = Integer.parseInt(timeStrs[0]);
+                        int hour = 0;
+                        int minutes = 0;
+                        int seconds = 0;
+                        if (timeStrs.length == 3) {
+                            hour = Integer.parseInt(timeStrs[0]);
+                            minutes = Integer.parseInt(timeStrs[1]);
+                            seconds = Integer.parseInt(timeStrs[2]);
+                        } else {
+                            minutes = Integer.parseInt(timeStrs[0]);
+                            seconds = Integer.parseInt(timeStrs[1]);
+                        }
+                        log.info("hour:" + hour);
                         log.info("minutes:" + minutes);
-                        int seconds = Integer.parseInt(timeStrs[1]);
                         log.info("seconds:" + seconds);
-                        long totalSeconds = minutes * 60 + seconds;
+                        long totalSeconds = hour * 3600 + minutes * 60 + seconds;
                         log.info("totalSeconds:" + totalSeconds);
                         long finishRemainingSeconds = (long) (((training_step - finishStep) / (training_step * 1.0d)) * totalSeconds);
                         log.info("finishRemainingSeconds:" + finishRemainingSeconds);
