@@ -36,8 +36,8 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
         cmd.append("--n_iter 8 ");
         cmd.append("--scale 10.0 ");
         cmd.append("--ddim_steps 50 ");
-        cmd.append("--ckpt /workspace/logs/Marcos_Images2022-11-17T04-01-14_\"marcos\"/checkpoints/last.ckpt ");
-        cmd.append("--prompt marcos anime ");
+        cmd.append("--ckpt /workspace/logs/Marcos_Images2022-11-17T04-01-14_\\\"marcos\\\"/checkpoints/last.ckpt ");
+        cmd.append("--prompt marcos,anime ");
         commandExecutor.execResult(3600, TimeUnit.SECONDS, cmd.toString(), new CommandExecutor.CommondListener() {
             @Override
             public void onStdout(String str) {
