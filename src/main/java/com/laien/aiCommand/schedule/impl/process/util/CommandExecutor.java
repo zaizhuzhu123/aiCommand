@@ -100,6 +100,46 @@ public class CommandExecutor {
      * @throws IOException
      * @throws InterruptedException
      */
+    public String execResult(long timeout, TimeUnit unit, String command, CommondListener listener) throws IOException, InterruptedException {
+        ForkerBuilder builder = new ForkerBuilder().io(IO.NON_BLOCKING).redirectErrorStream(true);
+        List<String> strings = Splitter.on(" ").omitEmptyStrings().splitToList(command);
+        builder.command(strings.toArray(new String[strings.size()]));
+        log.info("runCommond : " + command);
+        StringBuffer processOutMsg = new StringBuffer();
+        Process process = builder.start(new DefaultNonBlockingProcessListener() {
+            @Override
+            public void onStdout(NonBlockingProcess process, ByteBuffer buffer, boolean closed) {
+                if (!closed) {
+                    byte[] bytes = new byte[buffer.remaining()];
+                    /* Consume bytes from buffer (so position is updated) */
+                    buffer.get(bytes);
+                    String str = new String(bytes);
+                    processOutMsg.append(str);
+                    if (listener != null) {
+                        listener.onStdout(str);
+                    }
+                }
+            }
+        });
+        if (timeout == 0) {
+            process.waitFor();
+        } else {
+            process.waitFor(timeout, unit);
+        }
+        log.info(processOutMsg.toString());
+        return processOutMsg.toString();
+    }
+
+    /**
+     * 执行命令 并获取命令的输出信息
+     *
+     * @param timeout
+     * @param unit
+     * @param command
+     * @return
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public String execResult(long timeout, TimeUnit unit, String command) throws IOException, InterruptedException {
         ForkerBuilder builder = new ForkerBuilder().io(IO.NON_BLOCKING).redirectErrorStream(true);
         List<String> strings = Splitter.on(" ").omitEmptyStrings().splitToList(command);

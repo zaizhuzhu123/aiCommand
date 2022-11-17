@@ -34,6 +34,8 @@ com/laien/aiCommand/config/CorsConfig.class
 com/laien/aiCommand/thread/step/train/impl/TrainImg2CkptStep.class
 com/laien/aiCommand/schedule/impl/process/util/CommandExecutor$1.class
 com/laien/aiCommand/thread/step/dreambooth/impl/DownloadRegularizationStep.class
+com/laien/aiCommand/thread/step/train/impl/TrainImg2CkptStep$1.class
 com/laien/aiCommand/thread/step/ProcessStep.class
 com/laien/aiCommand/AiCommandJavaApplication.class
 com/laien/aiCommand/thread/step/dreambooth/impl/InstallRequirementStep.class
+com/laien/aiCommand/schedule/impl/process/util/CommandExecutor$4.class
