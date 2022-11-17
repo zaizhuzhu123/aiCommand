@@ -9,6 +9,7 @@ import com.laien.aiCommand.thread.step.train.DreamBoothTrainStep;
 import com.laien.aiCommand.thread.step.txt2img.Txt2ImgStep;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,7 @@ import java.util.List;
 @RestController
 @Api(tags = "AI接口")
 @RequestMapping("/ai")
+@Slf4j
 public class TestController extends ResponseController {
 
     @GetMapping("/test")
@@ -65,6 +67,7 @@ public class TestController extends ResponseController {
                 txt2ImgStep.run(aiTaskAddRequest);
             }
         }
+        log.info("trainingAndgenerate finish!");
         return succ("Hello World!");
     }
 
