@@ -46,6 +46,7 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
                     try {
                         String[] split = StringUtils.substringAfterLast(StringUtils.substringBeforeLast(str, "["), "|").trim().split("/");
                         int finishStep = Integer.parseInt(split[0]);
+                        int totalStep = Integer.parseInt(split[1]);
                         log.info("finishStep:" + finishStep);
                         String totalTime = StringUtils.substringBefore(StringUtils.substringAfterLast(str, "["), ",").split("<")[1];
                         log.info("totalTime:" + totalTime);
@@ -64,9 +65,11 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
                         log.info("hour:" + hour);
                         log.info("minutes:" + minutes);
                         log.info("seconds:" + seconds);
+                        double finishRate = (training_step - finishStep) / (training_step * 1.0d);
                         long totalSeconds = hour * 3600 + minutes * 60 + seconds;
+                        long traingingStepTotalSeconds = (long) (totalSeconds * (training_step / (totalStep * 1.0d)));
                         log.info("totalSeconds:" + totalSeconds);
-                        long finishRemainingSeconds = (long) (((training_step - finishStep) / (training_step * 1.0d)) * totalSeconds);
+                        long finishRemainingSeconds = (long) (finishRate * traingingStepTotalSeconds);
                         log.info("finishRemainingSeconds:" + finishRemainingSeconds);
                     } catch (Exception e) {
                         e.printStackTrace();
