@@ -29,7 +29,7 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
 
     @Override
     public void run(AiTask aiTask, AiTaskStep currentStep) throws IOException, InterruptedException {
-        int training_step = 500;
+        int training_step = 100;
         StringBuffer cmd = new StringBuffer();
         cmd.append("python " + dreamboothPath + "/main.py ");
         cmd.append("--base " + dreamboothPath + "/configs/stable-diffusion/v1-finetune_unfrozen.yaml ");
