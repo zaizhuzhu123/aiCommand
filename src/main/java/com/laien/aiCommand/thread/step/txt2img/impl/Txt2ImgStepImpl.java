@@ -4,6 +4,7 @@ import com.laien.aiCommand.request.AiTaskAddRequest;
 import com.laien.aiCommand.schedule.impl.process.util.CommandExecutor;
 import com.laien.aiCommand.thread.step.txt2img.Txt2ImgStep;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -41,6 +42,31 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
         commandExecutor.execResult(3600, TimeUnit.SECONDS, cmd.toString(), new CommandExecutor.CommondListener() {
             @Override
             public void onStdout(String str) {
+                if (str.contains("Sampling:")) {
+                    String s1 = StringUtils.substringAfterLast(str, "Sampling:");
+                    if (s1.contains("]")) {
+                        String totalTime = StringUtils.substringAfterLast(StringUtils.substringBefore(StringUtils.substringBefore(s1, "]"), ","), "<");
+                        if (totalTime.contains(":")) {
+                            String[] timeStrs = totalTime.split(":");
+                            int hour = 0;
+                            int minutes = 0;
+                            int seconds = 0;
+                            if (timeStrs.length == 3) {
+                                hour = Integer.parseInt(timeStrs[0]);
+                                minutes = Integer.parseInt(timeStrs[1]);
+                                seconds = Integer.parseInt(timeStrs[2]);
+                            } else {
+                                minutes = Integer.parseInt(timeStrs[0]);
+                                seconds = Integer.parseInt(timeStrs[1]);
+                            }
+                            log.info("hour:" + hour);
+                            log.info("minutes:" + minutes);
+                            log.info("seconds:" + seconds);
+                            long totalSeconds = hour * 3600 + minutes * 60 + seconds;
+                            log.info("finishRemainingSeconds:" + totalSeconds);
+                        }
+                    }
+                }
                 log.info(str);
             }
 

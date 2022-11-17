@@ -70,7 +70,8 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
                         long traingingStepTotalSeconds = (long) (totalSeconds * (training_step / (totalStep * 1.0d)));
                         log.info("totalSeconds:" + totalSeconds);
                         //预留三分钟保险
-                        long finishRemainingSeconds = (long) (finishRate * traingingStepTotalSeconds) + 60 * 3;
+//                        long finishRemainingSeconds = (long) (finishRate * traingingStepTotalSeconds) + 60 * 3;
+                        long finishRemainingSeconds = (long) (finishRate * traingingStepTotalSeconds);
                         log.info("finishRemainingSeconds:" + finishRemainingSeconds);
                     } catch (Exception e) {
                         e.printStackTrace();
