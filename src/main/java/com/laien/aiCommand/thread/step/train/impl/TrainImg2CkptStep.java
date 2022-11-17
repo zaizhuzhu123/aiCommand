@@ -37,7 +37,7 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
         cmd.append("python " + dreamboothPath + "/main.py ");
         cmd.append("--base " + dreamboothPath + "/configs/stable-diffusion/v1-finetune_unfrozen.yaml ");
         cmd.append("--logdir " + logDir + " ");
-        cmd.append("--datadir_in_name false");
+        cmd.append("--datadir_in_name false ");
 //        cmd.append("--project " + projectName + " ");
         cmd.append("-t ");
         cmd.append("--actual_resume " + dreamboothPath + "/model.ckpt ");
