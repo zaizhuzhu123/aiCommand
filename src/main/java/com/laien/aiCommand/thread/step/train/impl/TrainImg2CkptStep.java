@@ -42,20 +42,24 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
             @Override
             public void onStdout(String str) {
                 if (str.contains("Epoch 0:") && str.contains("[")) {
-                    String[] split = StringUtils.substringAfterLast(StringUtils.substringBeforeLast(str, "["), "|").trim().split("/");
-                    int finishStep = Integer.parseInt(split[0]);
-                    log.info("finishStep:" + finishStep);
-                    String totalTime = StringUtils.substringBefore(StringUtils.substringAfterLast(str, "["), ",").split("<")[1];
-                    log.info("totalTime:" + totalTime);
-                    String[] timeStrs = totalTime.split(":");
-                    int minutes = Integer.parseInt(timeStrs[0]);
-                    log.info("minutes:" + minutes);
-                    int seconds = Integer.parseInt(timeStrs[1]);
-                    log.info("seconds:" + seconds);
-                    long totalSeconds = minutes * 60 + seconds;
-                    log.info("totalSeconds:" + totalSeconds);
-                    long finishRemainingSeconds = (long) ((double) (finishStep / 500.0) * totalSeconds);
-                    log.info("finishRemainingSeconds:" + finishRemainingSeconds);
+                    try {
+                        String[] split = StringUtils.substringAfterLast(StringUtils.substringBeforeLast(str, "["), "|").trim().split("/");
+                        int finishStep = Integer.parseInt(split[0]);
+                        log.info("finishStep:" + finishStep);
+                        String totalTime = StringUtils.substringBefore(StringUtils.substringAfterLast(str, "["), ",").split("<")[1];
+                        log.info("totalTime:" + totalTime);
+                        String[] timeStrs = totalTime.split(":");
+                        int minutes = Integer.parseInt(timeStrs[0]);
+                        log.info("minutes:" + minutes);
+                        int seconds = Integer.parseInt(timeStrs[1]);
+                        log.info("seconds:" + seconds);
+                        long totalSeconds = minutes * 60 + seconds;
+                        log.info("totalSeconds:" + totalSeconds);
+                        long finishRemainingSeconds = (long) ((double) (finishStep / 500.0) * totalSeconds);
+                        log.info("finishRemainingSeconds:" + finishRemainingSeconds);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
                 log.info(str);
             }
