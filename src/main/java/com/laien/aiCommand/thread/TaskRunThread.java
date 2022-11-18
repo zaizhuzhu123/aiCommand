@@ -82,6 +82,7 @@ public class TaskRunThread extends Thread {
                 if (CollectionUtils.isEmpty(waitProcessSteps) || step == initEnvironment) {
                     return false;
                 }
+                aiTaskService.setStepProcess(step);
                 for (ProcessStep waitProcessStep : waitProcessSteps) {
                     log.info(stepName + "-" + waitProcessStep.getClass().getSimpleName());
                     waitProcessStep.run(aiTask, step);

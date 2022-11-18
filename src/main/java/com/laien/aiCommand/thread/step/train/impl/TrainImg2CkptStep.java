@@ -7,11 +7,13 @@ import com.laien.aiCommand.request.TrainingGenerateRequest;
 import com.laien.aiCommand.schedule.impl.process.util.CommandExecutor;
 import com.laien.aiCommand.thread.step.train.DreamBoothTrainStep;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -33,6 +35,10 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
         String token = trainingGenerateRequest.getToken();
         StringBuffer cmd = new StringBuffer();
         String ckptPath = AppliacationInfo.userTraingCkptPath.replace("{TASKID}", aiTask.getTaskId());
+        File ckptDir = new File(ckptPath);
+        if (ckptDir.exists()) {
+            FileUtils.cleanDirectory(ckptDir);
+        }
         String userUploadImgs = AppliacationInfo.userUploadImgPath.replace("{TASKID}", aiTask.getTaskId());
 //        String projectName = StringUtils.substringAfterLast(ckptPath, "/");
 //        String logDir = StringUtils.substringBeforeLast(ckptPath, "/");

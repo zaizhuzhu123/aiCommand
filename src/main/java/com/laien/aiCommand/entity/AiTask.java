@@ -1,6 +1,7 @@
 package com.laien.aiCommand.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
 import com.laien.aiCommand.config.AppliacationInfo;
 import com.laien.aiCommand.constant.TaskConstant;
@@ -24,7 +25,8 @@ public class AiTask {
     @ApiModelProperty(value = "任务id")
     private String taskId;
 
-    @ApiModelProperty(value = "请求信息")
+    @JsonIgnore
+//    @ApiModelProperty(value = "请求信息")
     private GenerateRequest requestData;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
