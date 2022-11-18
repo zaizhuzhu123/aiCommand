@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import static com.laien.aiCommand.constant.TaskConstant.TASK_STATUS_FINISH;
+import static com.laien.aiCommand.constant.TaskConstant.TASK_STATUS_PROCESS;
 
 @Component
 public class AiTaskServiceImpl implements IAiTaskService {
@@ -43,6 +44,11 @@ public class AiTaskServiceImpl implements IAiTaskService {
     public void setStepFinish(AiTaskStep taskStep) {
         taskStep.setStatus(TASK_STATUS_FINISH);
         taskStep.setRemainingFinishTime(0L);
+    }
+
+    @Override
+    public void setStepProcess(AiTaskStep taskStep) {
+        taskStep.setStatus(TASK_STATUS_PROCESS);
     }
 
     @Override

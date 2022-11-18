@@ -6,6 +6,7 @@ import com.laien.aiCommand.entity.AiTaskStep;
 import com.laien.aiCommand.schedule.impl.process.util.CommandExecutor;
 import com.laien.aiCommand.thread.step.txt2img.Txt2ImgStep;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -38,11 +39,16 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
         }
         String ckptDirPath = AppliacationInfo.userTraingCkptPath.replace("{TASKID}", aiTask.getTaskId());
         String userGeneratePath = AppliacationInfo.userGeneratePath.replace("{TASKID}", aiTask.getTaskId());
+        File userGenerateDir = new File(userGeneratePath);
+        if (userGenerateDir.exists()) {
+            FileUtils.cleanDirectory(userGenerateDir);
+        }
         File ckptPathDir = new File(ckptDirPath);
         if (!ckptPathDir.exists()) {
             ckptDirPath = AppliacationInfo.userTraingCkptPath.replace("{TASKID}", AppliacationInfo.lastTraingCkptTaskId);
             ckptPathDir = new File(ckptDirPath);
         }
+
         File[] files = ckptPathDir.listFiles();
         String ckptPath = "";
         if (files.length > 0) {

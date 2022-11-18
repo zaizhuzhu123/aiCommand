@@ -9,6 +9,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.annotation.Order;
@@ -40,6 +41,7 @@ public class DownloadFirebaseImgStep implements DreamBoothTrainStep {
             if (!taskDir.exists()) {
                 taskDir.mkdirs();
             }
+            FileUtils.cleanDirectory(taskDir);
             for (String firebaseImg : firebaseImgs) {
                 String prefix = StringUtils.substringAfterLast(StringUtils.substringBefore(firebaseImg, "?"), ".");
                 File file = new File(taskDir.getAbsolutePath() + "/" + UUID.randomUUID() + "." + prefix);

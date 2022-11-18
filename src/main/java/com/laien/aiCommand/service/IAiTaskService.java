@@ -21,6 +21,8 @@ public interface IAiTaskService {
 
     void setStepFinish(AiTaskStep taskStep);
 
+    void setStepProcess(AiTaskStep taskStep);
+
     void setTaskFinish(AiTask aiTask);
 
 }

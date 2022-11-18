@@ -147,7 +147,7 @@ public class AiTask {
             n_iter = 8;
             requestData.setN_iter(n_iter);
         }
-        upFiles.setRemainingFinishTime(n_iter * 60 + 60L);
+        upFiles.setRemainingFinishTime((long) (n_iter * 60) + 60L);
     }
 
     public Date getPlanCompletionTime() {
