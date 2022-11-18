@@ -116,7 +116,7 @@ public class CommandExecutor {
                         String a = "";
                         for (int i1 = i + 1; i1 < strings.size(); i1++) {
                             String a1 = strings.get(i1);
-                            a += a1;
+                            a += (a1 + " ");
                         }
                         newCommand.add(a);
                     }

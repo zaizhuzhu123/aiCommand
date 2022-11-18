@@ -2,6 +2,8 @@ package com.laien.aiCommand;
 
 //import org.mybatis.spring.annotation.MapperScan;
 
+import com.google.common.base.Splitter;
+import com.google.common.collect.Lists;
 import com.laien.aiCommand.config.AppliacationInfo;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -12,6 +14,8 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 /**
  * 启动
@@ -27,6 +31,7 @@ import org.springframework.web.client.RestTemplate;
 public class AiCommandJavaApplication {
 
     public static void main(String[] args) {
+
         if (args != null & args.length > 0) {
             AppliacationInfo.machineId = args[0];
         }
