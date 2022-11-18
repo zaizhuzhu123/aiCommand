@@ -29,6 +29,10 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
 
     @Override
     public void run(AiTask aiTask, AiTaskStep currentStep) throws IOException, InterruptedException {
+        int ddim_steps = 50;
+        if (aiTask.getRequestData().getDdim_steps() != null && aiTask.getRequestData().getDdim_steps() > 10) {
+            ddim_steps = aiTask.getRequestData().getDdim_steps();
+        }
         File ldmDir = new File(dreamboothPath + "/scripts/ldm");
         if (!ldmDir.exists()) {
             commandExecutor.execResult(3600, TimeUnit.SECONDS, "cp -r " + dreamboothPath + "/ldm " + dreamboothPath + "/scripts/");
@@ -49,7 +53,7 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
         cmd.append("--n_samples 1 ");
         cmd.append("--n_iter 8 ");
         cmd.append("--scale 10.0 ");
-        cmd.append("--ddim_steps 50 ");
+        cmd.append("--ddim_steps " + ddim_steps + " ");
         cmd.append("--ckpt " + ckptPath + " ");
         cmd.append("--outdir " + userGeneratePath + " ");
         cmd.append("--prompt marcos,anime ");

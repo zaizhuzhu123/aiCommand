@@ -3,7 +3,6 @@ package com.laien.aiCommand.thread.step.train.impl;
 import com.laien.aiCommand.config.AppliacationInfo;
 import com.laien.aiCommand.entity.AiTask;
 import com.laien.aiCommand.entity.AiTaskStep;
-import com.laien.aiCommand.request.AiTaskAddRequest;
 import com.laien.aiCommand.schedule.impl.process.util.CommandExecutor;
 import com.laien.aiCommand.thread.step.train.DreamBoothTrainStep;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +11,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -29,7 +27,10 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
 
     @Override
     public void run(AiTask aiTask, AiTaskStep currentStep) throws IOException, InterruptedException {
-        int training_step = 10;
+        int training_step = 500;
+        if (aiTask.getRequestData().getMax_training_steps() != null && aiTask.getRequestData().getMax_training_steps() > 10) {
+            training_step = aiTask.getRequestData().getMax_training_steps();
+        }
         StringBuffer cmd = new StringBuffer();
         String ckptPath = AppliacationInfo.userTraingCkptPath.replace("{TASKID}", aiTask.getTaskId());
         String userUploadImgs = AppliacationInfo.userUploadImgPath.replace("{TASKID}", aiTask.getTaskId());
@@ -48,8 +49,9 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
         cmd.append("--data_root " + userUploadImgs + " ");
         cmd.append("--max_training_steps " + training_step + " ");
         cmd.append("--class_word \"person\" ");
-        cmd.append("--token marcos ");
+        cmd.append("--token " + aiTask.getRequestData().getToken() + " ");
         cmd.append("--no-test");
+        int finalTraining_step = training_step;
         commandExecutor.execResult(3600, TimeUnit.SECONDS, cmd.toString(), new CommandExecutor.CommondListener() {
             @Override
             public void onStdout(String str) {
@@ -76,9 +78,9 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
                         log.info("hour:" + hour);
                         log.info("minutes:" + minutes);
                         log.info("seconds:" + seconds);
-                        double finishRate = (training_step - finishStep) / (training_step * 1.0d);
+                        double finishRate = (finalTraining_step - finishStep) / (finalTraining_step * 1.0d);
                         long totalSeconds = hour * 3600 + minutes * 60 + seconds;
-                        long traingingStepTotalSeconds = (long) (totalSeconds * (training_step / (totalStep * 1.0d)));
+                        long traingingStepTotalSeconds = (long) (totalSeconds * (finalTraining_step / (totalStep * 1.0d)));
                         log.info("totalSeconds:" + totalSeconds);
                         //预留三分钟保险
 //                        long finishRemainingSeconds = (long) (finishRate * traingingStepTotalSeconds) + 60 * 3;

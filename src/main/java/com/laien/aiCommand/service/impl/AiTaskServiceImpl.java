@@ -23,7 +23,7 @@ public class AiTaskServiceImpl implements IAiTaskService {
     @Override
     public void addTask(AiTask aiTask) {
         if (allAiTasks.containsKey(aiTask.getTaskId())) {
-            return;
+            throw new RuntimeException("Task id " + aiTask.getTaskId() + "already exists");
         }
         waitProcessAiTasks.offer(aiTask);
         allAiTasks.put(aiTask.getTaskId(), aiTask);

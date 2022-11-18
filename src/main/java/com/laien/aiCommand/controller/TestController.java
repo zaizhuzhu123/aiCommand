@@ -36,8 +36,16 @@ public class TestController extends ResponseController {
 
     @PostMapping("/trainingAndgenerate")
     @ApiOperation(value = "训练加生成")
-    public ResponseResult<AiTask> add(AiTaskAddRequest aiTaskAddRequest) throws IOException, InterruptedException {
+    public ResponseResult<AiTask> trainingAndgenerate(AiTaskAddRequest aiTaskAddRequest) throws IOException, InterruptedException {
         AiTask aiTask = AiTask.buildTrainingAndgenerate(aiTaskAddRequest);
+        aiTaskService.addTask(aiTask);
+        return succ(aiTask);
+    }
+
+    @PostMapping("/generateBylastTraing")
+    @ApiOperation(value = "基于上一次的训练结果重新生成")
+    public ResponseResult<AiTask> generateBylastTraing(AiTaskAddRequest aiTaskAddRequest) throws IOException, InterruptedException {
+        AiTask aiTask = AiTask.buildGenerate(aiTaskAddRequest);
         aiTaskService.addTask(aiTask);
         return succ(aiTask);
     }
