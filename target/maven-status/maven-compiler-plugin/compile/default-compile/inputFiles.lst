@@ -13,9 +13,9 @@
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/schedule/TaskResultUploader.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/AiCommandJavaApplication.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/util/HttpUtils.java
+/Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/request/TrainingGenerateRequest.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/schedule/impl/process/util/SourceFileInfo.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/schedule/TaskCompressionActuator.java
-/Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/request/AiTaskAddRequest.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/schedule/impl/TaskDispatcherImpl.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/entity/AiTaskStep.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/config/FirebaseConfig.java
@@ -35,6 +35,7 @@
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/thread/step/txt2img/impl/Txt2ImgStepImpl.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/controller/FileController.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/config/AppliacationInfo.java
+/Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/request/GenerateRequest.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/schedule/impl/process/TaskCompressionActuatorByVideo.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/config/MybatisPlusConfig.java
 /Users/apple/Documents/代码/aiCommand/src/main/java/com/laien/aiCommand/request/TaskAddReq.java

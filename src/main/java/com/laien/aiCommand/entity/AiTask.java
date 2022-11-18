@@ -1,11 +1,11 @@
 package com.laien.aiCommand.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
 import com.laien.aiCommand.config.AppliacationInfo;
 import com.laien.aiCommand.constant.TaskConstant;
-import com.laien.aiCommand.request.AiTaskAddRequest;
+import com.laien.aiCommand.request.GenerateRequest;
+import com.laien.aiCommand.request.TrainingGenerateRequest;
 import com.laien.aiCommand.service.IProcessStepService;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -25,7 +25,7 @@ public class AiTask {
     private String taskId;
 
     @ApiModelProperty(value = "请求信息")
-    private AiTaskAddRequest requestData;
+    private GenerateRequest requestData;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @ApiModelProperty(value = "任务开始时间")
@@ -48,7 +48,7 @@ public class AiTask {
     @ApiModelProperty(value = "生成的图片URl")
     private List<String> generateImgUrls = Lists.newArrayList();
 
-    private AiTask(AiTaskAddRequest requestData, List<AiTaskStep> steps) {
+    private AiTask(GenerateRequest requestData, List<AiTaskStep> steps) {
         this.taskId = requestData.getTaskId();
         this.requestData = requestData;
         this.steps = steps;
@@ -66,7 +66,7 @@ public class AiTask {
     }
 
 
-    public static AiTask buildTrainingAndgenerate(AiTaskAddRequest requestData) {
+    public static AiTask buildTrainingAndgenerate(TrainingGenerateRequest requestData) {
 
         List<AiTaskStep> steps = Lists.newArrayList();
         //初始化环境
@@ -97,20 +97,20 @@ public class AiTask {
         return aiTask;
     }
 
-    private static void fillTrainCost(AiTaskAddRequest requestData, AiTaskStep traingCkpt) {
+    private static void fillTrainCost(TrainingGenerateRequest requestData, AiTaskStep traingCkpt) {
         Integer max_training_steps = requestData.getMax_training_steps();
         if (max_training_steps == null) {
             max_training_steps = 500;
             requestData.setMax_training_steps(max_training_steps);
         }
         long planCostSeconds = 1200;
-        if (max_training_steps > 100) {
+        if (max_training_steps >= 100) {
             planCostSeconds = (long) (((max_training_steps / (100 * 1.0d)) * 154) + (60 * 3));
         }
         traingCkpt.setRemainingFinishTime(planCostSeconds);
     }
 
-    public static AiTask buildGenerate(AiTaskAddRequest requestData) {
+    public static AiTask buildGenerate(GenerateRequest requestData) {
         List<AiTaskStep> steps = Lists.newArrayList();
         //初始化环境
         steps.add(initEnvironment);
@@ -118,8 +118,8 @@ public class AiTask {
         //训练模型
         AiTaskStep traingCkpt = new AiTaskStep();
         traingCkpt.setStepName(TASK_STEP_TYPE_TRAING);
-        fillTrainCost(requestData, traingCkpt);
-        traingCkpt.setStatus(TaskConstant.TASK_STATUS_WAIT);
+        traingCkpt.setRemainingFinishTime(0L);
+        traingCkpt.setStatus(TASK_STATUS_FINISH);
         steps.add(traingCkpt);
 
         //生成图片
@@ -141,11 +141,11 @@ public class AiTask {
         return aiTask;
     }
 
-    private static void fillTxt2ImgTime(AiTaskAddRequest requestData, AiTaskStep upFiles) {
+    private static void fillTxt2ImgTime(GenerateRequest requestData, AiTaskStep upFiles) {
         Integer n_iter = requestData.getN_iter();
         if (n_iter == null) {
             n_iter = 8;
-            requestData.setN_iter(8);
+            requestData.setN_iter(n_iter);
         }
         upFiles.setRemainingFinishTime(n_iter * 60 + 60L);
     }

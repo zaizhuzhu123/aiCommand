@@ -3,6 +3,7 @@ package com.laien.aiCommand.thread.step.train.impl;
 import com.laien.aiCommand.config.AppliacationInfo;
 import com.laien.aiCommand.entity.AiTask;
 import com.laien.aiCommand.entity.AiTaskStep;
+import com.laien.aiCommand.request.TrainingGenerateRequest;
 import com.laien.aiCommand.schedule.impl.process.util.CommandExecutor;
 import com.laien.aiCommand.thread.step.train.DreamBoothTrainStep;
 import lombok.extern.slf4j.Slf4j;
@@ -27,10 +28,9 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
 
     @Override
     public void run(AiTask aiTask, AiTaskStep currentStep) throws IOException, InterruptedException {
-        int training_step = aiTask.getRequestData().getMax_training_steps();
-        if (aiTask.getRequestData().getMax_training_steps() != null && aiTask.getRequestData().getMax_training_steps() > 10) {
-            training_step = aiTask.getRequestData().getMax_training_steps();
-        }
+        TrainingGenerateRequest trainingGenerateRequest = (TrainingGenerateRequest) aiTask.getRequestData();
+        int training_step = trainingGenerateRequest.getMax_training_steps();
+        String token = trainingGenerateRequest.getToken();
         StringBuffer cmd = new StringBuffer();
         String ckptPath = AppliacationInfo.userTraingCkptPath.replace("{TASKID}", aiTask.getTaskId());
         String userUploadImgs = AppliacationInfo.userUploadImgPath.replace("{TASKID}", aiTask.getTaskId());
@@ -49,7 +49,7 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
         cmd.append("--data_root " + userUploadImgs + " ");
         cmd.append("--max_training_steps " + training_step + " ");
         cmd.append("--class_word \"person\" ");
-        cmd.append("--token " + aiTask.getRequestData().getToken() + " ");
+        cmd.append("--token " + token + " ");
         cmd.append("--no-test");
         int finalTraining_step = training_step;
         commandExecutor.execResult(3600, TimeUnit.SECONDS, cmd.toString(), new CommandExecutor.CommondListener() {

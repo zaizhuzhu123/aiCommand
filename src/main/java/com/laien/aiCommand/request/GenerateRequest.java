@@ -7,20 +7,11 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-@ApiModel(value = "任务创建请求", description = "任务创建请求")
-public class AiTaskAddRequest {
+@ApiModel(value = "生成", description = "生成")
+public class GenerateRequest {
 
     @ApiModelProperty(value = "任务id")
     private String taskId;
-
-    @ApiModelProperty(value = "用户图片")
-    private List<String> firebaseImgs;
-
-    @ApiModelProperty(value = "traing:Unique token you want to represent your trained model. Ex: firstNameLastName.")
-    private String token;
-
-    @ApiModelProperty(value = "traing:Number of training steps to run,默认500,脚本配置最大支持800")
-    private Integer max_training_steps;
 
     @ApiModelProperty(value = "generate:the prompt to rende")
     private String prompt;

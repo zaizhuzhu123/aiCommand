@@ -4,7 +4,8 @@ import com.laien.aiCommand.config.AppliacationInfo;
 import com.laien.aiCommand.controller.base.ResponseController;
 import com.laien.aiCommand.controller.base.ResponseResult;
 import com.laien.aiCommand.entity.AiTask;
-import com.laien.aiCommand.request.AiTaskAddRequest;
+import com.laien.aiCommand.request.GenerateRequest;
+import com.laien.aiCommand.request.TrainingGenerateRequest;
 import com.laien.aiCommand.service.IAiTaskService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,16 +37,16 @@ public class TestController extends ResponseController {
 
     @PostMapping("/trainingAndgenerate")
     @ApiOperation(value = "训练加生成")
-    public ResponseResult<AiTask> trainingAndgenerate(AiTaskAddRequest aiTaskAddRequest) throws IOException, InterruptedException {
-        AiTask aiTask = AiTask.buildTrainingAndgenerate(aiTaskAddRequest);
+    public ResponseResult<AiTask> trainingAndgenerate(TrainingGenerateRequest trainingGenerateRequest) throws IOException, InterruptedException {
+        AiTask aiTask = AiTask.buildTrainingAndgenerate(trainingGenerateRequest);
         aiTaskService.addTask(aiTask);
         return succ(aiTask);
     }
 
     @PostMapping("/generateBylastTraing")
     @ApiOperation(value = "基于上一次的训练结果重新生成")
-    public ResponseResult<AiTask> generateBylastTraing(AiTaskAddRequest aiTaskAddRequest) throws IOException, InterruptedException {
-        AiTask aiTask = AiTask.buildGenerate(aiTaskAddRequest);
+    public ResponseResult<AiTask> generateBylastTraing(GenerateRequest generateRequest) throws IOException, InterruptedException {
+        AiTask aiTask = AiTask.buildGenerate(generateRequest);
         aiTaskService.addTask(aiTask);
         return succ(aiTask);
     }

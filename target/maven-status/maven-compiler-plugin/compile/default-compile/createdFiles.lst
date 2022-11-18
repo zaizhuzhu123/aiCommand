@@ -17,7 +17,6 @@ com/laien/aiCommand/callback/CallBackReq.class
 com/laien/aiCommand/thread/step/train/DreamBoothTrainStep.class
 com/laien/aiCommand/controller/base/ResponseResult.class
 com/laien/aiCommand/constant/TaskConstant.class
-com/laien/aiCommand/request/AiTaskAddRequest.class
 com/laien/aiCommand/schedule/impl/process/util/CommandExecutor$2.class
 com/laien/aiCommand/controller/base/ResponseController.class
 com/laien/aiCommand/entity/AiTask.class
@@ -39,10 +38,12 @@ com/laien/aiCommand/thread/step/dreambooth/impl/CloneDreamBoothCodeStep.class
 com/laien/aiCommand/service/IAiTaskService.class
 com/laien/aiCommand/service/IProcessStepService.class
 com/laien/aiCommand/thread/step/dreambooth/InstallDreamBoothStep.class
+com/laien/aiCommand/request/GenerateRequest.class
 com/laien/aiCommand/thread/step/dreambooth/impl/DownloadCkptStep.class
 com/laien/aiCommand/config/CorsConfig.class
 com/laien/aiCommand/service/impl/ProcessStepServiceImpl.class
 com/laien/aiCommand/thread/step/train/impl/TrainImg2CkptStep.class
+com/laien/aiCommand/request/TrainingGenerateRequest.class
 com/laien/aiCommand/schedule/impl/process/util/CommandExecutor$1.class
 com/laien/aiCommand/thread/step/dreambooth/impl/DownloadRegularizationStep.class
 com/laien/aiCommand/thread/step/train/impl/TrainImg2CkptStep$1.class

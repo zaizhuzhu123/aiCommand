@@ -3,6 +3,7 @@ package com.laien.aiCommand.thread.step.train.impl;
 import com.laien.aiCommand.config.AppliacationInfo;
 import com.laien.aiCommand.entity.AiTask;
 import com.laien.aiCommand.entity.AiTaskStep;
+import com.laien.aiCommand.request.TrainingGenerateRequest;
 import com.laien.aiCommand.thread.step.train.DreamBoothTrainStep;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -31,7 +32,8 @@ public class DownloadFirebaseImgStep implements DreamBoothTrainStep {
 
     @Override
     public void run(AiTask aiTask, AiTaskStep currentStep) throws IOException, InterruptedException {
-        List<String> firebaseImgs = aiTask.getRequestData().getFirebaseImgs();
+        TrainingGenerateRequest trainingGenerateRequest = (TrainingGenerateRequest) aiTask.getRequestData();
+        List<String> firebaseImgs = trainingGenerateRequest.getFirebaseImgs();
         if (CollectionUtils.isNotEmpty(firebaseImgs)) {
             String userUploadImgs = AppliacationInfo.userUploadImgPath.replace("{TASKID}", aiTask.getTaskId());
             File taskDir = new File(userUploadImgs);
