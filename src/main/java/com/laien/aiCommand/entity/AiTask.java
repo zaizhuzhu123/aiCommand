@@ -91,7 +91,7 @@ public class AiTask {
         //上传图片
         AiTaskStep upFiles = new AiTaskStep();
         upFiles.setStepName(TASK_STEP_TYPE_UPLOADIMG);
-        fillTxt2ImgTime(requestData, upFiles);
+        fillUploadTime(requestData, upFiles);
         upFiles.setStatus(TaskConstant.TASK_STATUS_WAIT);
         steps.add(upFiles);
 
@@ -134,7 +134,7 @@ public class AiTask {
         //上传图片
         AiTaskStep upFiles = new AiTaskStep();
         upFiles.setStepName(TASK_STEP_TYPE_UPLOADIMG);
-        fillTxt2ImgTime(requestData, upFiles);
+        fillUploadTime(requestData, upFiles);
         upFiles.setStatus(TaskConstant.TASK_STATUS_WAIT);
         steps.add(upFiles);
 
@@ -143,13 +143,13 @@ public class AiTask {
         return aiTask;
     }
 
-    private static void fillTxt2ImgTime(GenerateRequest requestData, AiTaskStep upFiles) {
+    private static void fillUploadTime(GenerateRequest requestData, AiTaskStep upFiles) {
         Integer n_iter = requestData.getN_iter();
         if (n_iter == null) {
             n_iter = 8;
             requestData.setN_iter(n_iter);
         }
-        upFiles.setRemainingFinishTime((long) (n_iter * 60) + 60L);
+        upFiles.setRemainingFinishTime((long) (n_iter * 10) + 60L);
     }
 
     public Date getPlanCompletionTime() {

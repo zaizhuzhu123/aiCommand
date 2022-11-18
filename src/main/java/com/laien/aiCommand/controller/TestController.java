@@ -11,10 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.io.IOException;
@@ -37,7 +34,7 @@ public class TestController extends ResponseController {
 
     @PostMapping("/trainingAndgenerate")
     @ApiOperation(value = "训练加生成")
-    public ResponseResult<AiTask> trainingAndgenerate(TrainingGenerateRequest trainingGenerateRequest) throws IOException, InterruptedException {
+    public ResponseResult<AiTask> trainingAndgenerate(@RequestBody TrainingGenerateRequest trainingGenerateRequest) throws IOException, InterruptedException {
         AiTask aiTask = AiTask.buildTrainingAndgenerate(trainingGenerateRequest);
         try {
             aiTaskService.addTask(aiTask);
@@ -49,7 +46,7 @@ public class TestController extends ResponseController {
 
     @PostMapping("/generateBylastTraing")
     @ApiOperation(value = "基于上一次的训练结果重新生成")
-    public ResponseResult<AiTask> generateBylastTraing(GenerateRequest generateRequest) throws IOException, InterruptedException {
+    public ResponseResult<AiTask> generateBylastTraing(@RequestBody GenerateRequest generateRequest) throws IOException, InterruptedException {
         AiTask aiTask = AiTask.buildGenerate(generateRequest);
         try {
             aiTaskService.addTask(aiTask);
