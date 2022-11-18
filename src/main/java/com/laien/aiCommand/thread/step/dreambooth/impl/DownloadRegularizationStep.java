@@ -28,7 +28,7 @@ public class DownloadRegularizationStep implements InstallDreamBoothStep {
         log.info(this.getClass().getSimpleName());
         String cmd = "sh /workspace/aiCommand/target/soft/shell/downloadRegularization.sh";
         commandExecutor.execResult(300, TimeUnit.SECONDS, cmd);
-        currentStep.setRemainingFinishTime(currentStep.getRemainingFinishTime() - 600);
+        currentStep.setRemainingFinishTime(currentStep.getRemainingFinishTime() - 300);
     }
 
     @Override

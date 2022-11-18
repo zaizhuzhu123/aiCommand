@@ -25,6 +25,9 @@ public class AiTaskAddRequest {
     @ApiModelProperty(value = "generate:the prompt to rende")
     private String prompt;
 
+    @ApiModelProperty(value = "generate:生成的图片数量,默认为8")
+    private Integer n_iter;
+
     @ApiModelProperty(value = "generate:number of ddim sampling steps,默认50")
     private Integer ddim_steps;
 

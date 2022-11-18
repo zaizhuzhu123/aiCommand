@@ -28,7 +28,7 @@ public class HuggingfaceLoginStep implements InstallDreamBoothStep {
         log.info(this.getClass().getSimpleName());
         String cmd = "sh /workspace/aiCommand/target/soft/shell/huggingFaceLogin.sh";
         commandExecutor.execResult(10, TimeUnit.SECONDS, cmd);
-        currentStep.setRemainingFinishTime(currentStep.getRemainingFinishTime() - 600);
+        currentStep.setRemainingFinishTime(currentStep.getRemainingFinishTime() - 300);
     }
 
     @Override

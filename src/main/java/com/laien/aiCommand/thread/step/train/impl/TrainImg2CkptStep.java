@@ -27,7 +27,7 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
 
     @Override
     public void run(AiTask aiTask, AiTaskStep currentStep) throws IOException, InterruptedException {
-        int training_step = 500;
+        int training_step = aiTask.getRequestData().getMax_training_steps();
         if (aiTask.getRequestData().getMax_training_steps() != null && aiTask.getRequestData().getMax_training_steps() > 10) {
             training_step = aiTask.getRequestData().getMax_training_steps();
         }
@@ -104,7 +104,7 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
                 exception.printStackTrace();
             }
         });
-
+        AppliacationInfo.lastTraingCkptTaskId = aiTask.getTaskId();
     }
 
     @Override

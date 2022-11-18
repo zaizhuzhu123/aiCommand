@@ -31,7 +31,7 @@ public class CloneDreamBoothCodeStep implements InstallDreamBoothStep {
         commandExecutor.execResult(60, TimeUnit.SECONDS, cmd);
         cmd = "git clone https://github.com/zaizhuzhu123/Dreambooth-Stable-Diffusion.git " + dreamboothPath;
         commandExecutor.execResult(30, TimeUnit.SECONDS, cmd);
-        currentStep.setRemainingFinishTime(currentStep.getRemainingFinishTime() - 600);
+        currentStep.setRemainingFinishTime(currentStep.getRemainingFinishTime() - 300);
     }
 
     @Override

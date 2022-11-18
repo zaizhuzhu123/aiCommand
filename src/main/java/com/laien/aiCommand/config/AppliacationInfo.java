@@ -18,12 +18,13 @@ public class AppliacationInfo {
     public static String userUploadImgPath = taskPath + "/uploadImgs";
     public static String userTraingCkptPath = taskPath + "/traingCkpt";
     public static String userGeneratePath = taskPath + "/generate";
+    public static String lastTraingCkptTaskId;
     public static AiTaskStep initEnvironment = new AiTaskStep();
     public static ApplicationContext applicationContext;
 
     static {
         initEnvironment.setStepName(TASK_STEP_TYPE_INITENO);
-        initEnvironment.setRemainingFinishTime(3600L);
+        initEnvironment.setRemainingFinishTime(1800L);
         initEnvironment.setStatus(TASK_STATUS_WAIT);
     }
 

@@ -33,7 +33,7 @@ public class DownloadCkptStep implements InstallDreamBoothStep {
         cmd = "mv " + dreamboothPath + "/sd-v1-4.ckpt " + dreamboothPath + "/model.ckpt";
         result = commandExecutor.execResult(10, TimeUnit.SECONDS, cmd);
         log.info(result);
-        currentStep.setRemainingFinishTime(currentStep.getRemainingFinishTime() - 600);
+        currentStep.setRemainingFinishTime(currentStep.getRemainingFinishTime() - 300);
     }
 
     @Override

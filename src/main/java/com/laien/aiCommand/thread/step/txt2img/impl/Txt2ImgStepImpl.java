@@ -29,7 +29,7 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
 
     @Override
     public void run(AiTask aiTask, AiTaskStep currentStep) throws IOException, InterruptedException {
-        int ddim_steps = 50;
+        int ddim_steps = aiTask.getRequestData().getDdim_steps();
         if (aiTask.getRequestData().getDdim_steps() != null && aiTask.getRequestData().getDdim_steps() > 10) {
             ddim_steps = aiTask.getRequestData().getDdim_steps();
         }
@@ -40,6 +40,10 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
         String ckptDirPath = AppliacationInfo.userTraingCkptPath.replace("{TASKID}", aiTask.getTaskId());
         String userGeneratePath = AppliacationInfo.userGeneratePath.replace("{TASKID}", aiTask.getTaskId());
         File ckptPathDir = new File(ckptDirPath);
+        if (!ckptPathDir.exists()) {
+            ckptDirPath = AppliacationInfo.userTraingCkptPath.replace("{TASKID}", AppliacationInfo.lastTraingCkptTaskId);
+            ckptPathDir = new File(ckptDirPath);
+        }
         File[] files = ckptPathDir.listFiles();
         String ckptPath = "";
         if (files.length > 0) {
@@ -51,7 +55,7 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
         cmd.append("--ddim_eta 0.0 ");
         cmd.append("--config " + dreamboothPath + "/configs/stable-diffusion/v1-inference.yaml ");
         cmd.append("--n_samples 1 ");
-        cmd.append("--n_iter 8 ");
+        cmd.append("--n_iter " + aiTask.getRequestData().getN_iter() + " ");
         cmd.append("--scale 10.0 ");
         cmd.append("--ddim_steps " + ddim_steps + " ");
         cmd.append("--ckpt " + ckptPath + " ");

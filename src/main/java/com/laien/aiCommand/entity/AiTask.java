@@ -59,10 +59,15 @@ public class AiTask {
         for (AiTaskStep step : this.steps) {
             step.setProcessSteps(processStepService.getProcessSteps(step.getStepName()));
         }
+
+        if (requestData.getDdim_steps() == null) {
+            requestData.setDdim_steps(50);
+        }
     }
 
 
     public static AiTask buildTrainingAndgenerate(AiTaskAddRequest requestData) {
+
         List<AiTaskStep> steps = Lists.newArrayList();
         //初始化环境
         steps.add(initEnvironment);
@@ -70,26 +75,39 @@ public class AiTask {
         //训练模型
         AiTaskStep traingCkpt = new AiTaskStep();
         traingCkpt.setStepName(TASK_STEP_TYPE_TRAING);
-        traingCkpt.setRemainingFinishTime(3600L);
+        fillTrainCost(requestData, traingCkpt);
         traingCkpt.setStatus(TaskConstant.TASK_STATUS_WAIT);
         steps.add(traingCkpt);
 
         //生成图片
         AiTaskStep txt2Img = new AiTaskStep();
         txt2Img.setStepName(TASK_STEP_TYPE_GENERATE);
-        txt2Img.setRemainingFinishTime(1800L);
+        txt2Img.setRemainingFinishTime(300L);
         txt2Img.setStatus(TaskConstant.TASK_STATUS_WAIT);
         steps.add(txt2Img);
 
         //上传图片
         AiTaskStep upFiles = new AiTaskStep();
         upFiles.setStepName(TASK_STEP_TYPE_UPLOADIMG);
-        upFiles.setRemainingFinishTime(300L);
+        fillTxt2ImgTime(requestData, upFiles);
         upFiles.setStatus(TaskConstant.TASK_STATUS_WAIT);
         steps.add(upFiles);
 
         AiTask aiTask = new AiTask(requestData, steps);
         return aiTask;
+    }
+
+    private static void fillTrainCost(AiTaskAddRequest requestData, AiTaskStep traingCkpt) {
+        Integer max_training_steps = requestData.getMax_training_steps();
+        if (max_training_steps == null) {
+            max_training_steps = 500;
+            requestData.setMax_training_steps(max_training_steps);
+        }
+        long planCostSeconds = 1200;
+        if (max_training_steps > 100) {
+            planCostSeconds = (long) (((max_training_steps / (100 * 1.0d)) * 154) + (60 * 3));
+        }
+        traingCkpt.setRemainingFinishTime(planCostSeconds);
     }
 
     public static AiTask buildGenerate(AiTaskAddRequest requestData) {
@@ -100,27 +118,36 @@ public class AiTask {
         //训练模型
         AiTaskStep traingCkpt = new AiTaskStep();
         traingCkpt.setStepName(TASK_STEP_TYPE_TRAING);
-        traingCkpt.setRemainingFinishTime(0L);
-        traingCkpt.setStatus(TaskConstant.TASK_STATUS_FINISH);
+        fillTrainCost(requestData, traingCkpt);
+        traingCkpt.setStatus(TaskConstant.TASK_STATUS_WAIT);
         steps.add(traingCkpt);
 
         //生成图片
         AiTaskStep txt2Img = new AiTaskStep();
         txt2Img.setStepName(TASK_STEP_TYPE_GENERATE);
-        txt2Img.setRemainingFinishTime(3600L);
+        txt2Img.setRemainingFinishTime(300L);
         txt2Img.setStatus(TaskConstant.TASK_STATUS_WAIT);
         steps.add(txt2Img);
 
         //上传图片
         AiTaskStep upFiles = new AiTaskStep();
         upFiles.setStepName(TASK_STEP_TYPE_UPLOADIMG);
-        upFiles.setRemainingFinishTime(300L);
+        fillTxt2ImgTime(requestData, upFiles);
         upFiles.setStatus(TaskConstant.TASK_STATUS_WAIT);
         steps.add(upFiles);
 
         AiTask aiTask = new AiTask(requestData, steps);
 
         return aiTask;
+    }
+
+    private static void fillTxt2ImgTime(AiTaskAddRequest requestData, AiTaskStep upFiles) {
+        Integer n_iter = requestData.getN_iter();
+        if (n_iter == null) {
+            n_iter = 8;
+            requestData.setN_iter(8);
+        }
+        upFiles.setRemainingFinishTime(n_iter * 60 + 60L);
     }
 
     public Date getPlanCompletionTime() {

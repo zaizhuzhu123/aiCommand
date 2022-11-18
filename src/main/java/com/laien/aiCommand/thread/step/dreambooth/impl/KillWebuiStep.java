@@ -36,7 +36,7 @@ public class KillWebuiStep implements InstallDreamBoothStep {
         commandExecutor.execResult(30, TimeUnit.SECONDS, cmd);
         cmd = "sh /workspace/aiCommand/target/soft/shell/killWebui.sh";
         commandExecutor.execResult(30, TimeUnit.SECONDS, cmd);
-        currentStep.setRemainingFinishTime(currentStep.getRemainingFinishTime() - 600);
+        currentStep.setRemainingFinishTime(currentStep.getRemainingFinishTime() - 300);
     }
 
     @Override
