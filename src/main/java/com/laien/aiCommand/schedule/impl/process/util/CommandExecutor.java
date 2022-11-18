@@ -2,6 +2,7 @@ package com.laien.aiCommand.schedule.impl.process.util;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
+import com.google.common.collect.Lists;
 import com.sshtools.forker.client.DefaultNonBlockingProcessListener;
 import com.sshtools.forker.client.ForkerBuilder;
 import com.sshtools.forker.client.impl.nonblocking.NonBlockingProcess;
@@ -103,7 +104,30 @@ public class CommandExecutor {
     public String execResult(long timeout, TimeUnit unit, String command, CommondListener listener) throws IOException, InterruptedException {
         ForkerBuilder builder = new ForkerBuilder().io(IO.NON_BLOCKING).redirectErrorStream(true);
         List<String> strings = Splitter.on(" ").omitEmptyStrings().splitToList(command);
-        builder.command(strings.toArray(new String[strings.size()]));
+        List<String> newCommand = Lists.newArrayList();
+        if (strings.contains("--prompt")) {
+            for (int i = 0; i < strings.size(); i++) {
+                String s = strings.get(i);
+                if (!s.equals("--prompt")) {
+                    newCommand.add(s);
+                } else {
+                    newCommand.add(s);
+                    if ((i + 1) < strings.size()) {
+                        String a = "";
+                        for (int i1 = i + 1; i1 < strings.size(); i1++) {
+                            String a1 = strings.get(i1);
+                            a += a1;
+                        }
+                        newCommand.add(a);
+                    }
+                    break;
+                }
+            }
+        } else {
+            newCommand = strings;
+        }
+        builder.command(newCommand.toArray(new String[newCommand.size()]));
+
         log.info("runCommond : " + command);
         StringBuffer processOutMsg = new StringBuffer();
         Process process = builder.start(new DefaultNonBlockingProcessListener() {
