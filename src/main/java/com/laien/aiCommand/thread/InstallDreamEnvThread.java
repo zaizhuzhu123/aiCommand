@@ -24,9 +24,9 @@ public class InstallDreamEnvThread extends Thread {
         while (!AppliacationInfo.isInitStableDiffusionSuccess) {
             try {
                 initEnvironment.setStatus(TaskConstant.TASK_STATUS_PROCESS);
-//                for (InstallDreamBoothStep step : steps) {
-//                    step.run(null, initEnvironment);
-//                }
+                for (InstallDreamBoothStep step : steps) {
+                    step.run(null, initEnvironment);
+                }
                 AppliacationInfo.isInitStableDiffusionSuccess = true;
                 initEnvironment.setStatus(TaskConstant.TASK_STATUS_FINISH);
                 initEnvironment.setRemainingFinishTime(0L);
