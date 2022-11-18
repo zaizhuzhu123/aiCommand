@@ -33,6 +33,10 @@ public class UploadFirebaseStep implements ProcessStep {
     public void run(AiTask aiTask, AiTaskStep currentStep) throws IOException, InterruptedException {
         String userGeneratePath = AppliacationInfo.userGeneratePath.replace("{TASKID}", aiTask.getTaskId());
         log.info("upload dir " + userGeneratePath + " to firebase");
+        File file1 = new File(userGeneratePath);
+        if(!file1.exists()){
+            file1.mkdirs();
+        }
         Collection<File> files = FileUtils.listFiles(new File(userGeneratePath), null, false);
         for (File file : files) {
             String fireBaseUrl = uploadToFireBase(file.getAbsolutePath(), aiTask);
