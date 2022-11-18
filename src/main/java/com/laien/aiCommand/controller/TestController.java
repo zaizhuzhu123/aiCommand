@@ -39,7 +39,11 @@ public class TestController extends ResponseController {
     @ApiOperation(value = "训练加生成")
     public ResponseResult<AiTask> trainingAndgenerate(TrainingGenerateRequest trainingGenerateRequest) throws IOException, InterruptedException {
         AiTask aiTask = AiTask.buildTrainingAndgenerate(trainingGenerateRequest);
-        aiTaskService.addTask(aiTask);
+        try {
+            aiTaskService.addTask(aiTask);
+        } catch (Exception e) {
+            return fail(e.getMessage());
+        }
         return succ(aiTask);
     }
 
@@ -47,7 +51,11 @@ public class TestController extends ResponseController {
     @ApiOperation(value = "基于上一次的训练结果重新生成")
     public ResponseResult<AiTask> generateBylastTraing(GenerateRequest generateRequest) throws IOException, InterruptedException {
         AiTask aiTask = AiTask.buildGenerate(generateRequest);
-        aiTaskService.addTask(aiTask);
+        try {
+            aiTaskService.addTask(aiTask);
+        } catch (Exception e) {
+            return fail(e.getMessage());
+        }
         return succ(aiTask);
     }
 
