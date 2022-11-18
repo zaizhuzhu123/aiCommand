@@ -1,3 +1,0 @@
-git clone https://github.com/zaizhuzhu123/Stable-Diffusion-Regularization-Images-person_ddim.git /workspace/Dreambooth-Stable-Diffusion/Stable-Diffusion-Regularization-Images-person_ddim
-mkdir -p /workspace/Dreambooth-Stable-Diffusion/regularization_images/person_ddim
-mv -v /workspace/Dreambooth-Stable-Diffusion/Stable-Diffusion-Regularization-Images-person_ddim/person_ddim/*.* /workspace/Dreambooth-Stable-Diffusion/regularization_images/person_ddim

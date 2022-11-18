@@ -6,10 +6,10 @@ import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Bucket;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.cloud.StorageClient;
+import com.laien.aiCommand.config.AppliacationInfo;
 import com.laien.aiCommand.entity.AiTask;
 import com.laien.aiCommand.entity.AiTaskStep;
 import com.laien.aiCommand.thread.step.ProcessStep;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -31,13 +31,12 @@ import static com.laien.aiCommand.constant.TaskConstant.TASK_STEP_TYPE_UPLOADIMG
 public class UploadFirebaseStep implements ProcessStep {
     @Override
     public void run(AiTask aiTask, AiTaskStep currentStep) throws IOException, InterruptedException {
-        if (StringUtils.isNotBlank(aiTask.getGenerateImgDirPath())) {
-            log.info("upload dir " + aiTask.getGenerateImgDirPath() + " to firebase");
-            Collection<File> files = FileUtils.listFiles(new File(aiTask.getGenerateImgDirPath()), null, false);
-            for (File file : files) {
-                String fireBaseUrl = uploadToFireBase(file.getAbsolutePath(), aiTask);
-                aiTask.getGenerateImgUrls().add(fireBaseUrl);
-            }
+        String userGeneratePath = AppliacationInfo.userGeneratePath.replace("{TASKID}", aiTask.getTaskId());
+        log.info("upload dir " + userGeneratePath + " to firebase");
+        Collection<File> files = FileUtils.listFiles(new File(userGeneratePath), null, false);
+        for (File file : files) {
+            String fireBaseUrl = uploadToFireBase(file.getAbsolutePath(), aiTask);
+            aiTask.getGenerateImgUrls().add(fireBaseUrl);
         }
     }
 

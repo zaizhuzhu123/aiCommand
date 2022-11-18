@@ -12,7 +12,6 @@ public class AppliacationInfo {
     public static Boolean isSendHeartbeatSuccess = false;
     public static Boolean isInitStableDiffusionSuccess = false;
     //    public static String userImgSavePath = "/workspace/Dreambooth-Stable-Diffusion/"+ currentTaskId;
-    public static String userImgSavePath = "/Users/apple/Documents/test/" + machineId;
     public static String basePath = "/workspace";
     public static String dreamboothPath = basePath + "/Dreambooth-Stable-Diffusion";
     public static String taskPath = basePath + "/Task" + "/{TASKID}";

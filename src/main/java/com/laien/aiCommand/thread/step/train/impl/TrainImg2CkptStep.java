@@ -32,6 +32,7 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
         int training_step = 10;
         StringBuffer cmd = new StringBuffer();
         String ckptPath = AppliacationInfo.userTraingCkptPath.replace("{TASKID}", aiTask.getTaskId());
+        String userUploadImgs = AppliacationInfo.userUploadImgPath.replace("{TASKID}", aiTask.getTaskId());
 //        String projectName = StringUtils.substringAfterLast(ckptPath, "/");
 //        String logDir = StringUtils.substringBeforeLast(ckptPath, "/");
         cmd.append("python " + dreamboothPath + "/main.py ");
@@ -44,7 +45,7 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
         cmd.append("--reg_data_root " + dreamboothPath + "/regularization_images/person_ddim ");
 //        cmd.append("-n " + projectName + " ");
         cmd.append("--gpus 0, ");
-        cmd.append("--data_root /workspace/Marcos_Images ");
+        cmd.append("--data_root " + userUploadImgs + " ");
         cmd.append("--max_training_steps " + training_step + " ");
         cmd.append("--class_word \"person\" ");
         cmd.append("--token marcos ");

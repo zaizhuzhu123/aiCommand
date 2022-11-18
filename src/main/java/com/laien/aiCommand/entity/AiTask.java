@@ -45,9 +45,6 @@ public class AiTask {
     @ApiModelProperty(value = "任务流程")
     private List<AiTaskStep> steps = Lists.newArrayList();
 
-    @JsonIgnore
-    private String generateImgDirPath;
-
     @ApiModelProperty(value = "生成的图片URl")
     private List<String> generateImgUrls = Lists.newArrayList();
 

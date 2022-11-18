@@ -3,8 +3,6 @@ package com.laien.aiCommand.init;
 import com.laien.aiCommand.thread.InstallDreamEnvThread;
 import com.laien.aiCommand.thread.SendHeartBeatThread;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.context.event.ApplicationPreparedEvent;
-import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -30,6 +28,8 @@ public class Init {
         sendHeartBeatThread.start();
         //初始化计算环境
         installStableDiffusionEnvThread.start();
+        //修改/start.sh 开机启动
+
     }
 
 //    @Override
