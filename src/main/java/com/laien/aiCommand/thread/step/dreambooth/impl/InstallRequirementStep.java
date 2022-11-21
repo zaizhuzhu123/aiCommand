@@ -27,7 +27,7 @@ public class InstallRequirementStep implements InstallDreamBoothStep {
         log.info("-------------------------------------------");
         log.info(this.getClass().getSimpleName());
         String cmd = "sh /workspace/aiCommand/target/soft/shell/installRequirement.sh";
-        commandExecutor.execResult(300, TimeUnit.SECONDS, cmd);
+        commandExecutor.execResult(3600, TimeUnit.SECONDS, cmd);
         currentStep.setRemainingFinishTime(currentStep.getRemainingFinishTime() - 300);
     }
 
