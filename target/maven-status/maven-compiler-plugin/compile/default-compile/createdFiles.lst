@@ -1,6 +1,5 @@
 com/laien/aiCommand/controller/MacUtils.class
 com/laien/aiCommand/thread/step/dreambooth/impl/CloneDreamBoothCodeStep$1.class
-com/laien/aiCommand/thread/step/dreambooth/impl/InstallRequirementStep$1.class
 com/laien/aiCommand/schedule/impl/process/util/CommandExecutor$CommondListener.class
 com/laien/aiCommand/config/Knife4jConfiguration.class
 com/laien/aiCommand/thread/TaskRunThread.class
