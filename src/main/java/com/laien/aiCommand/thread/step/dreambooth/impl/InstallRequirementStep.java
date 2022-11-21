@@ -28,6 +28,8 @@ public class InstallRequirementStep implements InstallDreamBoothStep {
     public void run(AiTask aiTask, AiTaskStep currentStep) throws IOException, InterruptedException {
         log.info("-------------------------------------------");
         log.info(this.getClass().getSimpleName());
+        //等待一分钟 防止出现pip not found
+        Thread.sleep(60 * 1000);
         String cmd = "sh /workspace/aiCommand/target/soft/shell/installRequirement.sh";
         commandExecutor.execResult(3600, TimeUnit.SECONDS, cmd, new CommandExecutor.CommondListener() {
             @Override
@@ -44,7 +46,7 @@ public class InstallRequirementStep implements InstallDreamBoothStep {
             public void onError(Exception exception) {
 
             }
-        },new File(dreamboothPath));
+        }, new File(dreamboothPath));
         currentStep.setRemainingFinishTime(currentStep.getRemainingFinishTime() - 300);
     }
 
