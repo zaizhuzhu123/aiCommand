@@ -103,6 +103,7 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
             @Override
             public void onExit(int exitCode) {
                 log.info("exitCode:" + exitCode);
+                throw new RuntimeException("exitCode:" + exitCode);
             }
 
             @Override

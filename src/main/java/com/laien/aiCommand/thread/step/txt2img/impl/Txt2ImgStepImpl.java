@@ -101,6 +101,7 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
             @Override
             public void onExit(int exitCode) {
                 log.info("exitCode:" + exitCode);
+                throw new RuntimeException("exitCode:" + exitCode);
             }
 
             @Override
