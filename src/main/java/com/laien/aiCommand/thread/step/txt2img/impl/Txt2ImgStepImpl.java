@@ -65,7 +65,7 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
         cmd.append("--ddim_steps " + ddim_steps + " ");
         cmd.append("--ckpt " + ckptPath + " ");
         cmd.append("--outdir " + userGeneratePath + " ");
-        cmd.append("--prompt '" + aiTask.getRequestData().getPrompt() + "' ");
+        cmd.append("--prompt " + aiTask.getRequestData().getPrompt() + "");
         commandExecutor.execResult(3600, TimeUnit.SECONDS, cmd.toString(), new CommandExecutor.CommondListener() {
             @Override
             public void onStdout(String str) {
