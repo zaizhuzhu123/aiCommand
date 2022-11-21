@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.List;
@@ -162,7 +163,76 @@ public class CommandExecutor {
         } else {
             process.waitFor(timeout, unit);
         }
-        log.info(processOutMsg.toString());
+//        log.info(processOutMsg.toString());
+        return processOutMsg.toString();
+    }
+
+
+    public String execResult(long timeout, TimeUnit unit, String command, CommondListener listener, File directory) throws IOException, InterruptedException {
+        ForkerBuilder builder = new ForkerBuilder().io(IO.NON_BLOCKING).redirectErrorStream(true);
+        if(directory!=null){
+            builder.directory(directory);
+        }
+        List<String> strings = Splitter.on(" ").omitEmptyStrings().splitToList(command);
+        List<String> newCommand = Lists.newArrayList();
+        if (strings.contains("--prompt")) {
+            for (int i = 0; i < strings.size(); i++) {
+                String s = strings.get(i);
+                if (!s.equals("--prompt")) {
+                    newCommand.add(s);
+                } else {
+                    newCommand.add(s);
+                    if ((i + 1) < strings.size()) {
+                        String a = "";
+                        for (int i1 = i + 1; i1 < strings.size(); i1++) {
+                            String a1 = strings.get(i1);
+                            a += (a1 + " ");
+                        }
+                        newCommand.add(a);
+                    }
+                    break;
+                }
+            }
+        } else {
+            newCommand = strings;
+        }
+        builder.command(newCommand.toArray(new String[newCommand.size()]));
+
+        log.info("runCommond : " + command);
+        StringBuffer processOutMsg = new StringBuffer();
+        Process process = builder.start(new DefaultNonBlockingProcessListener() {
+            @Override
+            public void onStdout(NonBlockingProcess process, ByteBuffer buffer, boolean closed) {
+                if (!closed) {
+                    byte[] bytes = new byte[buffer.remaining()];
+                    /* Consume bytes from buffer (so position is updated) */
+                    buffer.get(bytes);
+                    String str = new String(bytes);
+                    processOutMsg.append(str);
+                    if (listener != null) {
+                        listener.onStdout(str);
+                    }
+                }
+            }
+
+            @Override
+            public void onExit(int exitCode, NonBlockingProcess process) {
+                super.onExit(exitCode, process);
+                listener.onExit(exitCode);
+            }
+
+            @Override
+            public void onError(Exception exception, NonBlockingProcess process, boolean existing) {
+                super.onError(exception, process, existing);
+                listener.onError(exception);
+            }
+        });
+        if (timeout == 0) {
+            process.waitFor();
+        } else {
+            process.waitFor(timeout, unit);
+        }
+//        log.info(processOutMsg.toString());
         return processOutMsg.toString();
     }
 

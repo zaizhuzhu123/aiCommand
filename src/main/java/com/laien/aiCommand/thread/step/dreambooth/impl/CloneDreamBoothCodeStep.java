@@ -30,7 +30,22 @@ public class CloneDreamBoothCodeStep implements InstallDreamBoothStep {
         String cmd = "rm -rf " + dreamboothPath;
         commandExecutor.execResult(60, TimeUnit.SECONDS, cmd);
         cmd = "git clone https://github.com/zaizhuzhu123/Dreambooth-Stable-Diffusion.git " + dreamboothPath;
-        commandExecutor.execResult(30, TimeUnit.SECONDS, cmd);
+        commandExecutor.execResult(30, TimeUnit.SECONDS, cmd, new CommandExecutor.CommondListener() {
+            @Override
+            public void onStdout(String str) {
+                log.info(str);
+            }
+
+            @Override
+            public void onExit(int exitCode) {
+
+            }
+
+            @Override
+            public void onError(Exception exception) {
+
+            }
+        });
         currentStep.setRemainingFinishTime(currentStep.getRemainingFinishTime() - 300);
     }
 

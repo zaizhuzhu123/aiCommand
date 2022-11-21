@@ -9,9 +9,11 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import static com.laien.aiCommand.config.AppliacationInfo.dreamboothPath;
 import static com.laien.aiCommand.constant.TaskConstant.TASK_STEP_TYPE_INITENO;
 
 @Component
@@ -27,7 +29,22 @@ public class InstallRequirementStep implements InstallDreamBoothStep {
         log.info("-------------------------------------------");
         log.info(this.getClass().getSimpleName());
         String cmd = "sh /workspace/aiCommand/target/soft/shell/installRequirement.sh";
-        commandExecutor.execResult(3600, TimeUnit.SECONDS, cmd);
+        commandExecutor.execResult(3600, TimeUnit.SECONDS, cmd, new CommandExecutor.CommondListener() {
+            @Override
+            public void onStdout(String str) {
+                log.info(str);
+            }
+
+            @Override
+            public void onExit(int exitCode) {
+
+            }
+
+            @Override
+            public void onError(Exception exception) {
+
+            }
+        },new File(dreamboothPath));
         currentStep.setRemainingFinishTime(currentStep.getRemainingFinishTime() - 300);
     }
 
