@@ -29,24 +29,24 @@ public class InstallRequirementStep implements InstallDreamBoothStep {
         log.info("-------------------------------------------");
         log.info(this.getClass().getSimpleName());
         //等待一分钟 防止出现pip not found
-//        String cmd = "pip install omegaconf";
-//        commandExecutor.execResult(3600, TimeUnit.SECONDS, cmd, new CommandExecutor.CommondListener() {
-//            @Override
-//            public void onStdout(String str) {
-//                log.info(str);
-//            }
-//
-//            @Override
-//            public void onExit(int exitCode) {
-//                log.info("exitCode:" + exitCode);
-//                throw new RuntimeException("exitCode:" + exitCode);
-//            }
-//
-//            @Override
-//            public void onError(Exception exception) {
-//
-//            }
-//        });
+        String cmd = "sh /workspace/aiCommand/target/soft/shell/installRequirement.sh";
+        commandExecutor.execResult(3600, TimeUnit.SECONDS, cmd, new CommandExecutor.CommondListener() {
+            @Override
+            public void onStdout(String str) {
+                log.info(str);
+            }
+
+            @Override
+            public void onExit(int exitCode) {
+                log.info("exitCode:" + exitCode);
+                throw new RuntimeException("exitCode:" + exitCode);
+            }
+
+            @Override
+            public void onError(Exception exception) {
+
+            }
+        });
         currentStep.setRemainingFinishTime(currentStep.getRemainingFinishTime() - 300);
     }
 

@@ -42,7 +42,7 @@ public class TrainImg2CkptStep implements DreamBoothTrainStep {
         String userUploadImgs = AppliacationInfo.userUploadImgPath.replace("{TASKID}", aiTask.getTaskId());
 //        String projectName = StringUtils.substringAfterLast(ckptPath, "/");
 //        String logDir = StringUtils.substringBeforeLast(ckptPath, "/");
-        cmd.append("python " + dreamboothPath + "/main.py ");
+        cmd.append("/venv/bin/python " + dreamboothPath + "/main.py ");
         cmd.append("--base " + dreamboothPath + "/configs/stable-diffusion/v1-finetune_unfrozen.yaml ");
         cmd.append("--logdir " + ckptPath + " ");
         cmd.append("--datadir_in_name false ");

@@ -55,7 +55,7 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
             ckptPath = files[files.length - 1].getAbsolutePath() + "/checkpoints/last.ckpt";
         }
         StringBuffer cmd = new StringBuffer();
-        cmd.append("python " + dreamboothPath + "/scripts/stable_txt2img.py ");
+        cmd.append("/venv/bin/python " + dreamboothPath + "/scripts/stable_txt2img.py ");
         cmd.append("--seed 10  ");
         cmd.append("--ddim_eta 0.0 ");
         cmd.append("--config " + dreamboothPath + "/configs/stable-diffusion/v1-inference.yaml ");
