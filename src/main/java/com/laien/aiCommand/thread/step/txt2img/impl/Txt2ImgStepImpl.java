@@ -47,6 +47,9 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
         if (!ckptPathDir.exists()) {
             ckptDirPath = AppliacationInfo.userTraingCkptPath.replace("{TASKID}", AppliacationInfo.lastTraingCkptTaskId);
             ckptPathDir = new File(ckptDirPath);
+            if (!ckptPathDir.exists()) {
+                ckptPathDir = scanLastestCkptDir(ckptPathDir);
+            }
         }
 
         File[] files = ckptPathDir.listFiles();
@@ -109,6 +112,26 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
                 exception.printStackTrace();
             }
         });
+    }
+
+    private File scanLastestCkptDir(File ckptPathDir) {
+        File taskDir = new File(AppliacationInfo.basePath + "/Task");
+        File[] files = taskDir.listFiles();
+        if (files != null && files.length > 0) {
+            long currentLastModified = 0L;
+            File ckptDir = null;
+            for (File file : files) {
+                long l = file.lastModified();
+                if (l > currentLastModified) {
+                    currentLastModified = l;
+                    ckptDir = file;
+                }
+            }
+            if (ckptDir != null) {
+                ckptPathDir = ckptDir;
+            }
+        }
+        return ckptPathDir;
     }
 
     @Override
