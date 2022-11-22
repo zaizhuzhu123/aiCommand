@@ -30,7 +30,7 @@ public class DownloadCkptStep implements InstallDreamBoothStep {
         String cmd = "wget https://n1ckey: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@huggingface.co/CompVis/stable-diffusion-v-1-4-original/resolve/main/sd-v1-4.ckpt -P " + dreamboothPath;
         String result = commandExecutor.execResult(3600, TimeUnit.SECONDS, cmd);
         log.info(result);
-        cmd = "mv " + dreamboothPath + "/sd-v1-4-full-ema.ckpt " + dreamboothPath + "/model.ckpt";
+        cmd = "mv " + dreamboothPath + "/sd-v1-4.ckpt " + dreamboothPath + "/model.ckpt";
         result = commandExecutor.execResult(10, TimeUnit.SECONDS, cmd, new CommandExecutor.CommondListener() {
             @Override
             public void onStdout(String str) {
