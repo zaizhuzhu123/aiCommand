@@ -27,7 +27,7 @@ public class DownloadCkptStep implements InstallDreamBoothStep {
     public void run(AiTask aiTask, AiTaskStep currentStep) throws IOException, InterruptedException {
         log.info("-------------------------------------------");
         log.info(this.getClass().getSimpleName());
-        String cmd = "wget https://n1ckey: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@huggingface.co/CompVis/stable-diffusion-v-1-4-original/resolve/main/sd-v1-4-full-ema.ckpt -P " + dreamboothPath;
+        String cmd = "wget https://n1ckey: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@huggingface.co/CompVis/stable-diffusion-v-1-4-original/resolve/main/sd-v1-4.ckpt -P " + dreamboothPath;
         String result = commandExecutor.execResult(3600, TimeUnit.SECONDS, cmd);
         log.info(result);
         cmd = "mv " + dreamboothPath + "/sd-v1-4-full-ema.ckpt " + dreamboothPath + "/model.ckpt";
