@@ -1,5 +1,5 @@
 server:
-  port: 19123
+  port: 8889
 
 # druid
 spring:
