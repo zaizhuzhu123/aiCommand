@@ -1,0 +1,1 @@
+nohup java -server -Xms1024m -Xmx1024m -XX:+PrintGCDateStamps -XX:+PrintGCDetails -Xloggc:./gclogs -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./java_heapdump.hprof -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8450,suspend=n -jar aiCommand.jar --spring.profiles.active=dev > nohup.out &

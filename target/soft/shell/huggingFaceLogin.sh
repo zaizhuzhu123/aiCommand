@@ -1,0 +1,1 @@
+/venv/bin/python -c "from huggingface_hub.hf_api import HfFolder; HfFolder.save_token('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');print('success')"

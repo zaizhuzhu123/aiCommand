@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <copy todir="/Users/apple/Documents/代码/aiCommand/target/soft" overwrite="true">
+    <fileset dir="/Users/apple/Documents/代码/aiCommand/target" erroronmissingdir="false">
+      <include name="*.jar"/>
+    </fileset>
+  </copy>
+</target>
+</project>
