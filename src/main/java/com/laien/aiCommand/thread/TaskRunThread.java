@@ -46,6 +46,7 @@ public class TaskRunThread extends Thread {
                             boolean isFinish = runSteps(nextTask);
                             if (isFinish) {
                                 aiTaskService.setTaskFinish(nextTask);
+                                log.info("任务完成 " + nextTask.getTaskId());
                                 break;
                             }
                         } catch (Exception e) {
