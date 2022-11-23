@@ -67,7 +67,6 @@ public class AiTask {
         }
     }
 
-
     public static AiTask buildTrainingAndgenerate(TrainingGenerateRequest requestData) {
 
         List<AiTaskStep> steps = Lists.newArrayList();

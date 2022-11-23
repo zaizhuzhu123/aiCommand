@@ -18,7 +18,7 @@ public class AppliacationInfo {
     public static String userUploadImgPath = taskPath + "/uploadImgs";
     public static String userTraingCkptPath = taskPath + "/traingCkpt";
     public static String userGeneratePath = taskPath + "/generate";
-    public static String lastTraingCkptTaskId;
+    public static String lastTraingCkptTaskId ="testtttttt";
     public static AiTaskStep initEnvironment = new AiTaskStep();
     public static ApplicationContext applicationContext;
 
