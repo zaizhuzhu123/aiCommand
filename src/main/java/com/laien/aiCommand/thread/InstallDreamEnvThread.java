@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.util.List;
 
 import static com.laien.aiCommand.config.AppliacationInfo.initEnvironment;
@@ -24,8 +25,12 @@ public class InstallDreamEnvThread extends Thread {
         while (!AppliacationInfo.isInitStableDiffusionSuccess) {
             try {
                 initEnvironment.setStatus(TaskConstant.TASK_STATUS_PROCESS);
-                for (InstallDreamBoothStep step : steps) {
-                    step.run(null, initEnvironment);
+                File file = new File("/init");
+                if (!file.exists()) {
+                    for (InstallDreamBoothStep step : steps) {
+                        step.run(null, initEnvironment);
+                    }
+                    file.createNewFile();
                 }
                 AppliacationInfo.isInitStableDiffusionSuccess = true;
                 initEnvironment.setStatus(TaskConstant.TASK_STATUS_FINISH);

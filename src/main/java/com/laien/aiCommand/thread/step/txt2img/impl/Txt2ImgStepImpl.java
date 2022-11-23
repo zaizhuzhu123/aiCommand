@@ -54,11 +54,14 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
                 ckptPathDir = scanLastestCkptDir(ckptPathDir);
             }
         }
-
-        File[] files = ckptPathDir.listFiles();
         String ckptPath = "";
-        if (files.length > 0) {
-            ckptPath = files[files.length - 1].getAbsolutePath() + "/checkpoints/last.ckpt";
+        if (ckptPathDir.getName().endsWith(".ckpt")) {
+            ckptPath = ckptPathDir.getAbsolutePath();
+        } else {
+            File[] files = ckptPathDir.listFiles();
+            if (files.length > 0) {
+                ckptPath = files[files.length - 1].getAbsolutePath() + "/checkpoints/last.ckpt";
+            }
         }
         StringBuffer cmd = new StringBuffer();
         cmd.append("/venv/bin/python " + dreamboothPath + "/scripts/stable_txt2img.py ");
@@ -119,7 +122,7 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
 
     private File scanLastestCkptDir(File ckptPathDir) {
         File taskDir = new File(AppliacationInfo.basePath + "/Task");
-        log.info("scan "+taskDir.getAbsolutePath());
+        log.info("scan " + taskDir.getAbsolutePath());
         Collection<File> ckpts = FileUtils.listFiles(taskDir, FileFilterUtils.suffixFileFilter("ckpt"), DirectoryFileFilter.INSTANCE);
         if (ckpts != null && ckpts.size() > 0) {
             long currentLastModified = 0L;
