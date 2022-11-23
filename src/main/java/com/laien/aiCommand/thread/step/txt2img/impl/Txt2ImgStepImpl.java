@@ -119,11 +119,13 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
 
     private File scanLastestCkptDir(File ckptPathDir) {
         File taskDir = new File(AppliacationInfo.basePath + "/Task");
+        log.info("scan "+taskDir.getAbsolutePath());
         Collection<File> ckpts = FileUtils.listFiles(taskDir, FileFilterUtils.suffixFileFilter("ckpt"), DirectoryFileFilter.INSTANCE);
         if (ckpts != null && ckpts.size() > 0) {
             long currentLastModified = 0L;
             File ckptDir = null;
             for (File file : ckpts) {
+                log.info(file.getAbsolutePath());
                 if (file.exists()) {
                     long l = file.lastModified();
                     if (l > currentLastModified) {
