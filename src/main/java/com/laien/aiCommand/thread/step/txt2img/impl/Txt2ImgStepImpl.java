@@ -7,6 +7,8 @@ import com.laien.aiCommand.schedule.impl.process.util.CommandExecutor;
 import com.laien.aiCommand.thread.step.txt2img.Txt2ImgStep;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.DirectoryFileFilter;
+import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
 import static com.laien.aiCommand.config.AppliacationInfo.dreamboothPath;
@@ -116,13 +119,12 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
 
     private File scanLastestCkptDir(File ckptPathDir) {
         File taskDir = new File(AppliacationInfo.basePath + "/Task");
-        File[] files = taskDir.listFiles();
-        if (files != null && files.length > 0) {
+        Collection<File> ckpts = FileUtils.listFiles(taskDir, FileFilterUtils.suffixFileFilter("ckpt"), DirectoryFileFilter.INSTANCE);
+        if (ckpts != null && ckpts.size() > 0) {
             long currentLastModified = 0L;
             File ckptDir = null;
-            for (File file : files) {
-                File ckptFile = new File(file.getAbsoluteFile() + "/checkpoints/last.ckpt");
-                if (ckptFile.exists()) {
+            for (File file : ckpts) {
+                if (file.exists()) {
                     long l = file.lastModified();
                     if (l > currentLastModified) {
                         currentLastModified = l;
@@ -136,6 +138,14 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
         }
         return ckptPathDir;
     }
+
+//    public static void main(String[] args) {
+//        File taskDir = new File("/Users/apple/Documents/代码/content-admin-java");
+//        Collection<File> ckpts = FileUtils.listFiles(taskDir, FileFilterUtils.suffixFileFilter("log"), DirectoryFileFilter.INSTANCE);
+//        for (File ckpt : ckpts) {
+//            System.out.println(ckpt.getAbsoluteFile());
+//        }
+//    }
 
     @Override
     public String type() {
