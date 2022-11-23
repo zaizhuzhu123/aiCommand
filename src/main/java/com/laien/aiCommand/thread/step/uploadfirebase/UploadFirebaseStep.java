@@ -31,10 +31,10 @@ import static com.laien.aiCommand.constant.TaskConstant.TASK_STEP_TYPE_UPLOADIMG
 public class UploadFirebaseStep implements ProcessStep {
     @Override
     public void run(AiTask aiTask, AiTaskStep currentStep) throws IOException, InterruptedException {
-        String userGeneratePath = AppliacationInfo.userGeneratePath.replace("{TASKID}", aiTask.getTaskId());
+        String userGeneratePath = AppliacationInfo.userGeneratePath.replace("{TASKID}", aiTask.getTaskId()) + "/samples";
         log.info("upload dir " + userGeneratePath + " to firebase");
         File file1 = new File(userGeneratePath);
-        if(!file1.exists()){
+        if (!file1.exists()) {
             file1.mkdirs();
         }
         Collection<File> files = FileUtils.listFiles(new File(userGeneratePath), null, false);
