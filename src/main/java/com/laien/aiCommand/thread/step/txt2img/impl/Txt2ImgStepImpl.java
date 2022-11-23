@@ -121,10 +121,13 @@ public class Txt2ImgStepImpl implements Txt2ImgStep {
             long currentLastModified = 0L;
             File ckptDir = null;
             for (File file : files) {
-                long l = file.lastModified();
-                if (l > currentLastModified) {
-                    currentLastModified = l;
-                    ckptDir = file;
+                File ckptFile = new File(file.getAbsoluteFile() + "/checkpoints/last.ckpt");
+                if (ckptFile.exists()) {
+                    long l = file.lastModified();
+                    if (l > currentLastModified) {
+                        currentLastModified = l;
+                        ckptDir = file;
+                    }
                 }
             }
             if (ckptDir != null) {
